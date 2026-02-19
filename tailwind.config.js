@@ -1,21 +1,14 @@
 export default {
-  darkMode: "class",
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
         primary: "#5b13ec",
         "background-light": "#f6f6f8",
-        "background-dark": "#161022",
+        "background-dark": "#1e1e2f",
       },
       fontFamily: {
-        display: ["Plus Jakarta Sans", "sans-serif"],
-      },
-      borderRadius: {
-        DEFAULT: "0.5rem",
-        lg: "1rem",
-        xl: "1.5rem",
-        full: "9999px",
+        jakarta: ["Plus Jakarta Sans", "sans-serif"],
       },
     },
   },
