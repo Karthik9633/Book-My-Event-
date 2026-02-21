@@ -1,64 +1,41 @@
-import { Plus, Minus, Navigation } from "lucide-react";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker
+} from "@react-google-maps/api";
 
-const MapView = () => {
+const containerStyle = {
+  width: "100%",
+  height: "100vh"
+};
+
+const center = {
+  lat: 37.7749,
+  lng: -122.4194
+};
+
+const MapView = ({ events }) => {
   return (
-    <div className="flex-1 relative">
-
-      {/* MAP BACKGROUND */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://maps.googleapis.com/maps/api/staticmap?center=San+Francisco&zoom=12&size=1200x800&maptype=roadmap')",
-        }}
-      />
-
-      {/* SEARCH THIS AREA */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2">
-        <button className="bg-white shadow px-6 py-3 rounded-full font-medium">
-          🔄 Search this area
-        </button>
-      </div>
-
-      {/* MAP CONTROLS */}
-      <div className="absolute right-6 top-6 flex flex-col gap-2">
-
-        <button className="bg-white p-3 rounded-xl shadow">
-          <Plus />
-        </button>
-
-        <button className="bg-white p-3 rounded-xl shadow">
-          <Minus />
-        </button>
-
-        <button className="bg-white p-3 rounded-xl shadow">
-          <Navigation />
-        </button>
-
-      </div>
-
-      {/* MAP MARKERS */}
-      <div className="absolute top-[40%] left-[45%] bg-purple-600 text-white px-4 py-2 rounded-full font-bold shadow">
-        $45
-      </div>
-
-      <div className="absolute top-[60%] left-[55%] bg-purple-600 text-white px-4 py-2 rounded-full font-bold shadow">
-        $15
-      </div>
-
-      {/* BOTTOM TOGGLE */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-        <div className="bg-white rounded-full shadow flex overflow-hidden">
-          <button className="px-6 py-3 font-medium text-gray-600">
-            List View
-          </button>
-          <button className="px-6 py-3 bg-purple-600 text-white font-medium">
-            Map View
-          </button>
-        </div>
-      </div>
-
-    </div>
+    <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={12}
+      >
+        {events.map((event) => (
+          <Marker
+            key={event.id}
+            position={{ lat: event.lat, lng: event.lng }}
+            label={{
+              text: event.price === 0 ? "Free" : `$${event.price}`,
+              color: "white",
+              fontSize: "12px",
+              fontWeight: "bold"
+            }}
+          />
+        ))}
+      </GoogleMap>
+    </LoadScript>
   );
 };
 
