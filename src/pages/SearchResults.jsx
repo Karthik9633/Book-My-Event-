@@ -12,14 +12,14 @@ const SearchResults = () => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "auto",
+      behavior: "aut",
     });
   }, []);
 
   return (
     <div className="bg-gray-50 min-h-screen">
 
-      <div className="max-w-7xl mx-auto px-6 py-10 flex gap-10">
+      <div className="max-w-7xl mx-0 px-6 py-10 flex gap-10">
 
         {/* LEFT SIDEBAR */}
         <FilterSidebar />
