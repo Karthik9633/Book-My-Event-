@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { events } from "../data/events";
 import EventCard from "../components/EventCard";
+import { Link } from "react-router-dom";
 
 const UpcomingSection = () => {
   const [startIndex, setStartIndex] = useState(0);
@@ -62,12 +63,12 @@ const UpcomingSection = () => {
 
       {/* Load More Button */}
       <div className="flex justify-center mt-10">
-        <button
-          onClick={nextEvents}
+        <Link
+          to="/search"
           className="px-6 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition text-sm font-medium"
         >
           Load More Events
-        </button>
+        </Link>
       </div>
 
     </div>
