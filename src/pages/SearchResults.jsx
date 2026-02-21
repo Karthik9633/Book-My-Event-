@@ -3,8 +3,19 @@ import ResultsHeader from "../components/ResultsHeader";
 import EventGridCard from "../components/EventGridCard";
 import Pagination from "../components/Pagination";
 import { events } from "../data/events";
+import { useEffect } from "react";
+
 
 const SearchResults = () => {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, []);
+
   return (
     <div className="bg-gray-50 min-h-screen">
 
