@@ -6,20 +6,20 @@ import { events } from "../data/events";
 import { useEffect } from "react";
 
 
-const SearchResults = () => {
+const allEvents = () => {
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "aut",
+      behavior: "auto",
     });
   }, []);
 
   return (
     <div className="bg-gray-50 min-h-screen">
 
-      <div className="max-w-7xl mx-0 px-6 py-10 flex gap-10">
+      <div className="w-full px-8 py-10 flex gap-10">
 
         {/* LEFT SIDEBAR */}
         <FilterSidebar />
@@ -45,4 +45,4 @@ const SearchResults = () => {
   );
 };
 
-export default SearchResults;
+export default allEvents;
