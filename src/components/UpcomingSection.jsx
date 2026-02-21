@@ -39,14 +39,14 @@ const UpcomingSection = () => {
           <button
             onClick={prevEvents}
             className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center bg-white shadow-sm hover:bg-gray-100 transition"
-          >
+          style={{ fontSize: '1.5rem' }}>
             ‹
           </button>
 
           <button
             onClick={nextEvents}
             className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center bg-white shadow-sm hover:bg-gray-100 transition"
-          >
+          style={{ fontSize: '1.5rem' }}>
             ›
           </button>
         </div>
