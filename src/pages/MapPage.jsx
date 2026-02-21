@@ -12,7 +12,7 @@ const MapPage = () => {
       : events.filter((e) => e.category === selectedCategory);
 
   return (
-    <div className="flex">
+    <div className="h-[calc(100vh-80px)] flex">
 
       <MapSidebar
         selectedCategory={selectedCategory}
