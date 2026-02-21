@@ -3,6 +3,14 @@ import { events } from "../data/events";
 import { useState, useEffect } from "react";
 
 const EventDetails = () => {
+    
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "auto",
+        });
+    }, []);
     const { id } = useParams();
     const event = events.find((e) => e.id === Number(id));
 
