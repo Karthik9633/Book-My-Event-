@@ -7,7 +7,7 @@ const Navbar = () => {
 
             <div className="space-x-8 font-medium">
                 <Link to="/">Discover</Link>
-                <Link to="/calendar">Calendar</Link>
+                <Link to="/search">Events</Link>
                 <Link to="/map">Map</Link>
             </div>
 
