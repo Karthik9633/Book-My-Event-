@@ -17,39 +17,26 @@ const SearchResults = () => {
     venue: ""
   });
 
-  // 🔥 ADD THIS
   const [currentPage, setCurrentPage] = useState(1);
 
-  // 🔥 FILTER LOGIC (UNCHANGED)
+  
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
-      const { categories, startDate, endDate, price, venue } = appliedFilters;
+      const { categories, price } = appliedFilters;
 
+      
       const categoryMatch =
         categories.includes("All Events") ||
         categories.includes(event.category);
 
+      
       const priceMatch = event.price <= price;
 
-      let dateMatch = true;
-      if (startDate) {
-        dateMatch = new Date(event.date) >= new Date(startDate);
-      }
-      if (endDate) {
-        dateMatch =
-          dateMatch && new Date(event.date) <= new Date(endDate);
-      }
-
-      let venueMatch = true;
-      if (venue) {
-        venueMatch = event.venueType === venue;
-      }
-
-      return categoryMatch && priceMatch && dateMatch && venueMatch;
+      return categoryMatch && priceMatch;
     });
   }, [appliedFilters]);
 
-  // 🔥 ADD THIS
+ 
   const totalPages = Math.ceil(filteredEvents.length / EVENTS_PER_PAGE);
 
   const paginatedEvents = filteredEvents.slice(
@@ -60,26 +47,41 @@ const SearchResults = () => {
   return (
     <div className="flex">
 
+      
       <FilterSidebar
         appliedFilters={appliedFilters}
-        setAppliedFilters={setAppliedFilters}
+        setAppliedFilters={(filters) => {
+          setAppliedFilters(filters);
+          setCurrentPage(1); 
+        }}
       />
 
+      
       <div className="flex-1 p-8 bg-gray-50">
+
         <ResultsHeader count={filteredEvents.length} />
 
+        
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8">
-          {paginatedEvents.map((event) => (
-            <EventGridCard key={event.id} event={event} />
-          ))}
+          {paginatedEvents.length > 0 ? (
+            paginatedEvents.map((event) => (
+              <EventGridCard key={event.id} event={event} />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-20 text-gray-500">
+              No events found matching your filters.
+            </div>
+          )}
         </div>
 
-        {/* 🔥 ADD THIS */}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-        />
+        
+        {totalPages > 1 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
 
       </div>
 
