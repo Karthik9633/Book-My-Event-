@@ -4,7 +4,6 @@ export const events = [
     title: "Global AI & Robotics Summit 2024",
     category: "Technology",
     featured: true,
-
     date: "Nov 15 - 17",
     location: "San Francisco",
     price: 149,
@@ -25,7 +24,14 @@ export const events = [
     ],
 
     organizer: "TechWorld Conferences",
-    venueAddress: "Moscone Center, San Francisco, CA"
+    venueAddress: "Moscone Center, San Francisco, CA",
+
+    ticketTiers: [
+      { name: "General Admission", price: 149 },
+      { name: "VIP Pass", price: 299 },
+      { name: "Early Bird", price: 119 },
+      { name: "Backstage Access", price: 499 }
+    ]
   },
 
   {
@@ -33,7 +39,6 @@ export const events = [
     title: "Summer Sound Waves Festival",
     category: "Music",
     featured: true,
-
     date: "Oct 12",
     location: "Central Park",
     price: 45,
@@ -54,7 +59,14 @@ export const events = [
     ],
 
     organizer: "LiveNation Events",
-    venueAddress: "Central Park Main Grounds"
+    venueAddress: "Central Park Main Grounds",
+
+    ticketTiers: [
+      { name: "General Admission", price: 45 },
+      { name: "VIP Zone", price: 120 },
+      { name: "Early Bird", price: 35 },
+      { name: "Platinum Access", price: 199 }
+    ]
   },
 
   {
@@ -62,7 +74,6 @@ export const events = [
     title: "International Startup Expo 2024",
     category: "Business",
     featured: true,
-
     date: "Dec 5 - 6",
     location: "New York",
     price: 99,
@@ -83,7 +94,14 @@ export const events = [
     ],
 
     organizer: "Global Ventures Group",
-    venueAddress: "Javits Convention Center, NYC"
+    venueAddress: "Javits Convention Center, NYC",
+
+    ticketTiers: [
+      { name: "General Entry", price: 99 },
+      { name: "Investor Pass", price: 249 },
+      { name: "Startup Booth", price: 499 },
+      { name: "Early Bird", price: 79 }
+    ]
   },
 
   {
@@ -91,7 +109,6 @@ export const events = [
     title: "World Fitness & Wellness Camp",
     category: "Health",
     featured: true,
-
     date: "Nov 25",
     location: "Los Angeles",
     price: 75,
@@ -112,7 +129,14 @@ export const events = [
     ],
 
     organizer: "WellLife Organization",
-    venueAddress: "LA Sports Arena, Los Angeles"
+    venueAddress: "LA Sports Arena, Los Angeles",
+
+    ticketTiers: [
+      { name: "Standard Access", price: 75 },
+      { name: "Premium Wellness Pass", price: 150 },
+      { name: "VIP Training Package", price: 249 },
+      { name: "Early Bird", price: 59 }
+    ]
   },
 
   {
@@ -120,7 +144,6 @@ export const events = [
     title: "Art & Culture Carnival",
     category: "Art",
     featured: true,
-
     date: "Dec 18 - 20",
     location: "Chicago",
     price: 60,
@@ -141,7 +164,14 @@ export const events = [
     ],
 
     organizer: "Creative Arts Collective",
-    venueAddress: "Downtown Cultural Center, Chicago"
+    venueAddress: "Downtown Cultural Center, Chicago",
+
+    ticketTiers: [
+      { name: "General Entry", price: 60 },
+      { name: "Artist Access", price: 120 },
+      { name: "Workshop Pass", price: 89 },
+      { name: "VIP Experience", price: 199 }
+    ]
   },
 
   {
@@ -149,7 +179,6 @@ export const events = [
     title: "Global Food & Wine Festival",
     category: "Food & Drink",
     featured: true,
-
     date: "Jan 10",
     location: "Miami",
     price: 85,
@@ -170,6 +199,13 @@ export const events = [
     ],
 
     organizer: "TasteWorld Events",
-    venueAddress: "Miami Beach Convention Center"
+    venueAddress: "Miami Beach Convention Center",
+
+    ticketTiers: [
+      { name: "General Tasting Pass", price: 85 },
+      { name: "VIP Gourmet Pass", price: 199 },
+      { name: "Wine Masterclass", price: 149 },
+      { name: "Early Bird", price: 69 }
+    ]
   }
 ];
