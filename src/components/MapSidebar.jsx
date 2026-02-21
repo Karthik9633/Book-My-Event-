@@ -45,7 +45,7 @@ const MapSidebar = () => {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 text-xs rounded-full font-semibold transition ${
+              className={`px-2 py-2 text-xs rounded-full font-semibold transition ${
                 selectedCategory === cat
                   ? "bg-purple-600 text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
