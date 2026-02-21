@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { events } from "../data/events";
 import { useState, useEffect } from "react";
+import EventMap from "../components/EventMap";
 
 const EventDetails = () => {
     
