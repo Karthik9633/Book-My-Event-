@@ -18,28 +18,41 @@ const SearchResults = () => {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortOption, setSortOption] = useState("recommended");
 
-  
+  // FILTER
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       const { categories, price } = appliedFilters;
 
-      
       const categoryMatch =
         categories.includes("All Events") ||
         categories.includes(event.category);
 
-      
       const priceMatch = event.price <= price;
 
       return categoryMatch && priceMatch;
     });
   }, [appliedFilters]);
 
- 
-  const totalPages = Math.ceil(filteredEvents.length / EVENTS_PER_PAGE);
+  // SORT
+  const sortedEvents = useMemo(() => {
+    const sorted = [...filteredEvents];
 
-  const paginatedEvents = filteredEvents.slice(
+    if (sortOption === "low") {
+      sorted.sort((a, b) => a.price - b.price);
+    } else if (sortOption === "high") {
+      sorted.sort((a, b) => b.price - a.price);
+    } else if (sortOption === "newest") {
+      sorted.sort((a, b) => b.id - a.id);
+    }
+
+    return sorted;
+  }, [filteredEvents, sortOption]);
+
+  const totalPages = Math.ceil(sortedEvents.length / EVENTS_PER_PAGE);
+
+  const paginatedEvents = sortedEvents.slice(
     (currentPage - 1) * EVENTS_PER_PAGE,
     currentPage * EVENTS_PER_PAGE
   );
@@ -47,21 +60,27 @@ const SearchResults = () => {
   return (
     <div className="flex">
 
-      
       <FilterSidebar
         appliedFilters={appliedFilters}
         setAppliedFilters={(filters) => {
           setAppliedFilters(filters);
-          setCurrentPage(1); 
+          setCurrentPage(1);
         }}
       />
 
-      
       <div className="flex-1 p-8 bg-gray-50">
 
-        <ResultsHeader count={filteredEvents.length} />
+        <ResultsHeader
+          total={sortedEvents.length}
+          currentPage={currentPage}
+          eventsPerPage={EVENTS_PER_PAGE}
+          sortOption={sortOption}
+          setSortOption={(value) => {
+            setSortOption(value);
+            setCurrentPage(1);
+          }}
+        />
 
-        
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8">
           {paginatedEvents.length > 0 ? (
             paginatedEvents.map((event) => (
@@ -74,7 +93,6 @@ const SearchResults = () => {
           )}
         </div>
 
-        
         {totalPages > 1 && (
           <Pagination
             currentPage={currentPage}
