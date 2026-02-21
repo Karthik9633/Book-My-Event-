@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { LayoutGrid, Map, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ResultsHeader = () => {
   const [view, setView] = useState("grid");
@@ -35,7 +36,7 @@ const ResultsHeader = () => {
             Grid
           </button>
 
-          <button
+          <Link to="/map"
             onClick={() => setView("map")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition ${
               view === "map"
@@ -45,9 +46,9 @@ const ResultsHeader = () => {
           >
             <Map size={16} />
             Map
-          </button>
+          </Link>
 
-          <button
+          <Link to="/Calendar"
             onClick={() => setView("calendar")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition ${
               view === "calendar"
@@ -57,7 +58,7 @@ const ResultsHeader = () => {
           >
             <Calendar size={16} />
             Calendar
-          </button>
+          </Link>
 
         </div>
       </div>
