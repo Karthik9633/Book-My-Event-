@@ -6,26 +6,23 @@ export const events = [
     featured: true,
     date: "Nov 15 - 17",
     location: "San Francisco",
+    lat: 37.7837,
+    lng: -122.4011,
     price: 149,
     image:
       "https://images.unsplash.com/photo-1506157786151-b8491531f063",
-
     about:
-      "A premier global technology summit focused on AI innovation, robotics, and future automation trends.",
-
+      "A premier global technology summit focused on AI innovation and robotics.",
     description:
-      "Join global innovators and industry leaders for a 3-day immersive experience exploring artificial intelligence, robotics, and the future of automation.",
-
+      "Join global innovators and industry leaders for a 3-day immersive experience exploring artificial intelligence and automation.",
     highlights: [
-      "Keynotes from top AI researchers",
+      "Keynotes from AI researchers",
       "Hands-on robotics workshops",
       "Startup pitch competitions",
       "Networking with 5,000+ professionals"
     ],
-
     organizer: "TechWorld Conferences",
     venueAddress: "Moscone Center, San Francisco, CA",
-
     ticketTiers: [
       { name: "General Admission", price: 149 },
       { name: "VIP Pass", price: 299 },
@@ -40,26 +37,30 @@ export const events = [
     category: "Music",
     featured: true,
     date: "Oct 12",
-    location: "Central Park",
+    location: "San Francisco",
+    lat: 37.7694,
+    lng: -122.4862,
+
     price: 45,
+
     image:
       "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
 
     about:
-      "An electrifying outdoor music festival featuring top international and local artists.",
+      "An electrifying outdoor music festival featuring top artists.",
 
     description:
-      "Experience electrifying performances from top international and local artists at one of the biggest outdoor music festivals of the year.",
+      "Experience live performances from international and local artists.",
 
     highlights: [
       "Multiple live stages",
-      "Food trucks & craft beverages",
+      "Food trucks & beverages",
       "Interactive light shows",
       "VIP backstage access"
     ],
 
     organizer: "LiveNation Events",
-    venueAddress: "Central Park Main Grounds",
+    venueAddress: "Golden Gate Park, San Francisco",
 
     ticketTiers: [
       { name: "General Admission", price: 45 },
@@ -74,23 +75,28 @@ export const events = [
     title: "International Startup Expo 2024",
     category: "Business",
     featured: true,
+
     date: "Dec 5 - 6",
     location: "New York",
+    lat: 40.7570,
+    lng: -74.0020,
+
     price: 99,
+
     image:
       "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
 
     about:
-      "A global gathering of entrepreneurs, investors, and startup innovators.",
+      "A global gathering of entrepreneurs and investors.",
 
     description:
-      "Connect with entrepreneurs, investors, and innovators from around the globe at the International Startup Expo 2024.",
+      "Connect with innovators from around the globe.",
 
     highlights: [
-      "Investor networking sessions",
+      "Investor networking",
       "Startup showcase booths",
       "Live pitch competitions",
-      "Expert-led business panels"
+      "Expert panels"
     ],
 
     organizer: "Global Ventures Group",
@@ -109,23 +115,28 @@ export const events = [
     title: "World Fitness & Wellness Camp",
     category: "Health",
     featured: true,
+
     date: "Nov 25",
     location: "Los Angeles",
+    lat: 34.0430,
+    lng: -118.2673,
+
     price: 75,
+
     image:
       "https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
 
     about:
-      "A full-day immersive wellness experience for fitness enthusiasts and health lovers.",
+      "A full-day immersive wellness experience.",
 
     description:
-      "A full-day immersive wellness experience featuring fitness trainers, yoga masters, and nutrition experts.",
+      "Featuring fitness trainers and yoga masters.",
 
     highlights: [
       "Live workout sessions",
-      "Yoga & meditation workshops",
+      "Yoga workshops",
       "Healthy meal tastings",
-      "Personal fitness consultations"
+      "Fitness consultations"
     ],
 
     organizer: "WellLife Organization",
@@ -133,8 +144,8 @@ export const events = [
 
     ticketTiers: [
       { name: "Standard Access", price: 75 },
-      { name: "Premium Wellness Pass", price: 150 },
-      { name: "VIP Training Package", price: 249 },
+      { name: "Premium Pass", price: 150 },
+      { name: "VIP Package", price: 249 },
       { name: "Early Bird", price: 59 }
     ]
   },
@@ -144,23 +155,28 @@ export const events = [
     title: "Art & Culture Carnival Fest 2026",
     category: "Art",
     featured: true,
+
     date: "Dec 18 - 20",
     location: "Chicago",
+    lat: 41.8781,
+    lng: -87.6298,
+
     price: 60,
+
     image:
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
 
     about:
-      "A vibrant celebration of art, creativity, and cultural performances.",
+      "A celebration of creativity and cultural performances.",
 
     description:
-      "Celebrate creativity and culture with artists, performers, and cultural exhibits from around the world.",
+      "Celebrate art, culture, and global performances.",
 
     highlights: [
       "Live art demonstrations",
-      "Cultural dance performances",
-      "Handcrafted marketplace",
-      "Interactive art workshops"
+      "Cultural performances",
+      "Marketplace",
+      "Workshops"
     ],
 
     organizer: "Creative Arts Collective",
@@ -179,33 +195,38 @@ export const events = [
     title: "Global Food & Wine Festival",
     category: "Food & Drink",
     featured: true,
+
     date: "Jan 10",
     location: "Miami",
+    lat: 25.7617,
+    lng: -80.1918,
+
     price: 85,
+
     image:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
 
     about:
-      "A gourmet celebration of international cuisine and world-class wines.",
+      "A gourmet celebration of international cuisine.",
 
     description:
-      "Indulge in gourmet cuisine and world-class wines at Miami’s most anticipated culinary festival.",
+      "Indulge in gourmet cuisine and world-class wines.",
 
     highlights: [
-      "International chef showcases",
-      "Premium wine tastings",
-      "Live cooking competitions",
-      "Food pairing masterclasses"
+      "Chef showcases",
+      "Wine tastings",
+      "Cooking competitions",
+      "Masterclasses"
     ],
 
     organizer: "TasteWorld Events",
     venueAddress: "Miami Beach Convention Center",
 
     ticketTiers: [
-      { name: "General Tasting Pass", price: 85 },
+      { name: "General Pass", price: 85 },
       { name: "VIP Gourmet Pass", price: 199 },
       { name: "Wine Masterclass", price: 149 },
       { name: "Early Bird", price: 69 }
     ]
   }
-];
+]
