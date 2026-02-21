@@ -158,11 +158,7 @@ const EventDetails = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden shadow-md">
-                            <img
-                                src="https://images.unsplash.com/photo-1502920917128-1aa500764ce7"
-                                alt="Map"
-                                className="w-full h-72 object-cover"
-                            />
+                           <EventMap lat={event.lat} lng={event.lng} />
                         </div>
                     </div>
                 </div>
