@@ -24,7 +24,7 @@ const MapSidebar = () => {
         );
 
   return (
-    <aside className="w-[420px] bg-white border-r border-gray-200 flex flex-col">
+    <aside className="w-[420px] bg-white border-r border-gray-200 flex flex-col h-full">
 
       {/* HEADER */}
       <div className="p-6 border-b">
