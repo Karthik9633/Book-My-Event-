@@ -13,9 +13,10 @@ import {
 } from "date-fns";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { events } from "../data/events";
+import { Link } from "react-router-dom";
 
 const Calendar = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date(2023, 9)); // October 2023
+  const [currentMonth, setCurrentMonth] = useState(new Date(2023, 9)); 
   const [selectedDate, setSelectedDate] = useState(new Date(2023, 9, 5));
 
   const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
@@ -139,9 +140,9 @@ const Calendar = () => {
 
         {/* Show Map */}
         <div className="flex justify-center py-6">
-          <button className="bg-black text-white px-6 py-3 rounded-full shadow-lg">
+          <Link to="/map" className="bg-black text-white px-6 py-3 rounded-full shadow-lg">
             🗺 Show Map
-          </button>
+          </Link>
         </div>
       </main>
 
