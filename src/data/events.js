@@ -141,7 +141,7 @@ export const events = [
 
   {
     id: 5,
-    title: "Art & Culture Carnival",
+    title: "Art & Culture Carnival Fest 2026",
     category: "Art",
     featured: true,
     date: "Dec 18 - 20",
