@@ -3,11 +3,16 @@ export const events = [
     id: 1,
     title: "Global AI & Robotics Summit 2024",
     category: "Technology",
+    featured: true,
+
     date: "Nov 15 - 17",
     location: "San Francisco",
     price: 149,
     image:
       "https://images.unsplash.com/photo-1506157786151-b8491531f063",
+
+    about:
+      "A premier global technology summit focused on AI innovation, robotics, and future automation trends.",
 
     description:
       "Join global innovators and industry leaders for a 3-day immersive experience exploring artificial intelligence, robotics, and the future of automation.",
@@ -27,11 +32,16 @@ export const events = [
     id: 2,
     title: "Summer Sound Waves Festival",
     category: "Music",
+    featured: true,
+
     date: "Oct 12",
     location: "Central Park",
     price: 45,
     image:
       "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
+
+    about:
+      "An electrifying outdoor music festival featuring top international and local artists.",
 
     description:
       "Experience electrifying performances from top international and local artists at one of the biggest outdoor music festivals of the year.",
@@ -51,11 +61,16 @@ export const events = [
     id: 3,
     title: "International Startup Expo 2024",
     category: "Business",
+    featured: true,
+
     date: "Dec 5 - 6",
     location: "New York",
     price: 99,
     image:
       "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
+
+    about:
+      "A global gathering of entrepreneurs, investors, and startup innovators.",
 
     description:
       "Connect with entrepreneurs, investors, and innovators from around the globe at the International Startup Expo 2024.",
@@ -75,11 +90,16 @@ export const events = [
     id: 4,
     title: "World Fitness & Wellness Camp",
     category: "Health",
+    featured: true,
+
     date: "Nov 25",
     location: "Los Angeles",
     price: 75,
     image:
       "https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
+
+    about:
+      "A full-day immersive wellness experience for fitness enthusiasts and health lovers.",
 
     description:
       "A full-day immersive wellness experience featuring fitness trainers, yoga masters, and nutrition experts.",
@@ -99,11 +119,16 @@ export const events = [
     id: 5,
     title: "Art & Culture Carnival",
     category: "Art",
+    featured: true,
+
     date: "Dec 18 - 20",
     location: "Chicago",
     price: 60,
     image:
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+
+    about:
+      "A vibrant celebration of art, creativity, and cultural performances.",
 
     description:
       "Celebrate creativity and culture with artists, performers, and cultural exhibits from around the world.",
@@ -122,12 +147,17 @@ export const events = [
   {
     id: 6,
     title: "Global Food & Wine Festival",
-    category: "Food",
+    category: "Food & Drink",
+    featured: true,
+
     date: "Jan 10",
     location: "Miami",
     price: 85,
     image:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
+
+    about:
+      "A gourmet celebration of international cuisine and world-class wines.",
 
     description:
       "Indulge in gourmet cuisine and world-class wines at Miami’s most anticipated culinary festival.",
