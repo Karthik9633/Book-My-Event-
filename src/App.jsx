@@ -6,6 +6,8 @@ import EventDetails from "./pages/EventDetails";
 import CalendarPage from "./pages/CalendarPage";
 import MapPage from "./pages/MapPage";
 import SearchResults from "./pages/SearchResults";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/search" element={<SearchResults />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </Layout>
   );
