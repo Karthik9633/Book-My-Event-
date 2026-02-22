@@ -47,7 +47,7 @@ const FilterSidebar = ({ appliedFilters, setAppliedFilters }) => {
   };
 
   return (
-    <aside className="w-[300px] bg-[#f9fafc] border-r p-6">
+    <aside className="w-full lg:w-[300px] bg-[#f9fafc] border-r p-6">
 
       {/* CATEGORIES */}
       <div className="mb-10">
