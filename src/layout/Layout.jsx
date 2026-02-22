@@ -1,13 +1,17 @@
+import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const Layout = ({ children }) => {
+  const location = useLocation()
+  const hideNavbar =
+    location.pathname === "/login" ||
+    location.pathname === "/signup"
+
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <Navbar />
+    <>
+      {!hideNavbar && <Navbar />}
       {children}
-      <Footer />
-    </div>
+    </>
   );
 };
 
