@@ -36,7 +36,7 @@ const Home = () => {
 
 
       <div className="bg-gray-50 border-b">
-        <div className="max-w-7xl mx-64 px-10 py-6 flex gap-5 overflow-x-auto">
+        <div className="max-w-7xl mx-64 px-4 sm:px-6 lg:px-10 py-6 flex gap-5 overflow-x-auto">
           {categories.map((cat, index) => (
             <button
               key={index}
