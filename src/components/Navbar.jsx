@@ -1,29 +1,89 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
-    return (
-        <div className="bg-white shadow-md px-4 sm:px-6 lg:px-10 py-4 flex flex-wrap items-center justify-between gap-4">
-            <h1 className="text-2xl font-bold text-purple-600">BookMyEvent</h1>
+  const [isOpen, setIsOpen] = useState(false);
 
-            <div className="hidden md:flex space-x-6 lg:space-x-8 font-medium text-sm lg:text-base">
-                <Link to="/">Discover</Link>
-                <Link to="/search">Events</Link>
-                <Link to="/map">Map</Link>
-            </div>
+  return (
+    <nav className="bg-white shadow-md fixed w-full z-50">
 
-            <div className="gap-3 flex">
+      <div className="px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center">
 
-            <button className="bg-purple-600 text-white px-5 py-2 rounded-full hover:scale-105 transition hover:bg-purple-900">
-                Login
-            </button>
-            <button className="bg-purple-600 text-white px-5 py-2 rounded-full hover:scale-105 transition hover:bg-purple-900">
-                Sign Up
-            </button>
+        <h1 className="text-2xl font-bold text-purple-600">
+          BookMyEvent
+        </h1>
 
-            </div>
+        <div className="hidden md:flex space-x-8 font-medium">
+          <Link to="/">Discover</Link>
+          <Link to="/calendar">Calendar</Link>
+          <Link to="/map">Map</Link>
+        </div>
+
+        
+        <div className="hidden md:flex gap-3">
+          <button className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
+            Login
+          </button>
+          <button className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
+            Sign Up
+          </button>
+        </div>
+
+       
+        <button
+          className="md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+      </div>
+
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+          isOpen ? "max-h-[500px]" : "max-h-0"
+        }`}
+      >
+        <div className="px-6 pb-6 flex flex-col gap-4 bg-white shadow-lg">
+
+          <Link
+            to="/"
+            onClick={() => setIsOpen(false)}
+            className="font-medium"
+          >
+            Discover
+          </Link>
+
+          <Link
+            to="/calendar"
+            onClick={() => setIsOpen(false)}
+            className="font-medium"
+          >
+            Calendar
+          </Link>
+
+          <Link
+            to="/map"
+            onClick={() => setIsOpen(false)}
+            className="font-medium"
+          >
+            Map
+          </Link>
+
+          <button className="bg-purple-600 text-white py-2 rounded-full mt-2">
+            Login
+          </button>
+
+          <button className="bg-purple-600 text-white py-2 rounded-full">
+            Sign Up
+          </button>
 
         </div>
-    );
+      </div>
+
+    </nav>
+  );
 };
 
 export default Navbar;
