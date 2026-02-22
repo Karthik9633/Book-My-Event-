@@ -22,12 +22,12 @@ const Navbar = () => {
 
         
         <div className="hidden md:flex gap-3">
-          <button className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
+          <Link to="/login" className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
             Login
-          </button>
-          <button className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
+          </Link>
+          <Link to="/signup" className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
             Sign Up
-          </button>
+          </Link>
         </div>
 
        
@@ -39,6 +39,7 @@ const Navbar = () => {
         </button>
 
       </div>
+
 
       <div
         className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
@@ -71,13 +72,13 @@ const Navbar = () => {
             Map
           </Link>
 
-          <button className="bg-purple-600 text-white py-2 rounded-full mt-2">
+         <Link to="/login"> <button className=" w-full bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
             Login
-          </button>
+          </button></Link>
 
-          <button className="bg-purple-600 text-white py-2 rounded-full">
+          <Link to="/signup"> <button className="w-full bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
             Sign Up
-          </button>
+          </button></Link> 
 
         </div>
       </div>
