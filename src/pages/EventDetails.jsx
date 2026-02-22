@@ -62,13 +62,13 @@ const EventDetails = () => {
                     <img
                         src={event.image}
                         alt={event.title}
-                        className="w-full h-[450px] object-cover"
+                        className="w-full h-64 sm:h-80 md:h-[450px] object-cover"
                     />
                 </div>
             </div>
 
 
-            <div className="max-w-7xl mx-auto px-6 mt-10 grid md:grid-cols-3 gap-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-10 grid lg:grid-cols-3 gap-10">
 
 
                 <div className="md:col-span-2">
@@ -164,7 +164,7 @@ const EventDetails = () => {
                 </div>
 
 
-                <div className="bg-white rounded-3xl shadow-lg p-8 h-fit sticky top-24">
+                <div className="bg-white rounded-3xl shadow-lg p-6 sm:p-8 h-fit lg:sticky top-24">
 
                     <div className="flex justify-between items-center mb-6">
                         <p className="text-3xl font-extrabold text-purple-600">
