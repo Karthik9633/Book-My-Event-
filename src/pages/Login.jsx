@@ -1,7 +1,46 @@
-import { Eye, Mail, Lock } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  // Validate Form
+  const validate = (field, value) => {
+    let newErrors = { ...errors };
+
+    if (field === "email") {
+      if (!value) {
+        newErrors.email = "Email is required";
+      } else if (!/\S+@\S+\.\S+/.test(value)) {
+        newErrors.email = "Enter a valid email address";
+      } else {
+        delete newErrors.email;
+      }
+    }
+
+    if (field === "password") {
+      if (!value) {
+        newErrors.password = "Password is required";
+      } else if (value.length < 6) {
+        newErrors.password = "Password must be at least 6 characters";
+      } else {
+        delete newErrors.password;
+      }
+    }
+
+    setErrors(newErrors);
+  };
+
+  const isFormValid =
+    email &&
+    password &&
+    !errors.email &&
+    !errors.password;
+
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
 
@@ -51,10 +90,20 @@ const Login = () => {
               <Mail size={18} className="text-gray-400 mr-3" />
               <input
                 type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  validate("email", e.target.value);
+                }}
                 placeholder="name@example.com"
                 className="w-full outline-none bg-transparent"
               />
             </div>
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-2 ml-2">
+                {errors.email}
+              </p>
+            )}
           </div>
 
           {/* PASSWORD */}
@@ -69,12 +118,34 @@ const Login = () => {
             <div className="flex items-center border rounded-full px-4 py-3 mt-2 bg-white">
               <Lock size={18} className="text-gray-400 mr-3" />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  validate("password", e.target.value);
+                }}
                 placeholder="••••••••"
                 className="w-full outline-none bg-transparent"
               />
-              <Eye size={18} className="text-gray-400 cursor-pointer" />
+              {showPassword ? (
+                <EyeOff
+                  size={18}
+                  className="text-gray-400 cursor-pointer"
+                  onClick={() => setShowPassword(false)}
+                />
+              ) : (
+                <Eye
+                  size={18}
+                  className="text-gray-400 cursor-pointer"
+                  onClick={() => setShowPassword(true)}
+                />
+              )}
             </div>
+            {errors.password && (
+              <p className="text-red-500 text-xs mt-2 ml-2">
+                {errors.password}
+              </p>
+            )}
           </div>
 
           {/* CHECKBOX */}
@@ -84,7 +155,14 @@ const Login = () => {
           </div>
 
           {/* BUTTON */}
-          <button className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold shadow-lg hover:opacity-95 transition">
+          <button
+            disabled={!isFormValid}
+            className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold shadow-lg transition ${
+              !isFormValid
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:opacity-95"
+            }`}
+          >
             Sign In →
           </button>
 
