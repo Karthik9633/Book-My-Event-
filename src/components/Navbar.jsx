@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <div className="bg-white shadow-sm px-10 py-4 flex justify-between items-center">
+        <div className="bg-white shadow-md px-4 sm:px-6 lg:px-10 py-4 flex flex-wrap items-center justify-between gap-4">
             <h1 className="text-2xl font-bold text-purple-600">BookMyEvent</h1>
 
-            <div className="space-x-8 font-medium">
+            <div className="hidden md:flex space-x-6 lg:space-x-8 font-medium text-sm lg:text-base">
                 <Link to="/">Discover</Link>
                 <Link to="/search">Events</Link>
                 <Link to="/map">Map</Link>
