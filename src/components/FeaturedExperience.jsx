@@ -11,7 +11,7 @@ const FeaturedExperience = ({ event }) => {
         </button>
       </div>
 
-      <div className="grid md:grid-cols-2 bg-white rounded-3xl shadow-lg overflow-hidden transition-all duration-300">
+      <div className="grid grid-cols-1 md:grid-cols-2 bg-white rounded-3xl shadow-lg overflow-hidden transition-all duration-300">
 
         <div className="relative">
           <img
