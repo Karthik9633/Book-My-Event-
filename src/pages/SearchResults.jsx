@@ -58,7 +58,7 @@ const SearchResults = () => {
   );
 
   return (
-    <div className="flex">
+    <div className="flex flex-col lg:flex-row">
 
       <FilterSidebar
         appliedFilters={appliedFilters}
@@ -68,7 +68,7 @@ const SearchResults = () => {
         }}
       />
 
-      <div className="flex-1 p-8 bg-gray-50">
+      <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-gray-50">
 
         <ResultsHeader
           total={sortedEvents.length}
