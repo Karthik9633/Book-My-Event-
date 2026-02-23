@@ -6,7 +6,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
 
       <div className="px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center">
 
@@ -16,7 +16,7 @@ const Navbar = () => {
 
         <div className="hidden md:flex space-x-8 font-medium">
           <Link to="/">Discover</Link>
-          <Link to="/calendar">Calendar</Link>
+          <Link to="/search">Events</Link>
           <Link to="/map">Map</Link>
         </div>
 
