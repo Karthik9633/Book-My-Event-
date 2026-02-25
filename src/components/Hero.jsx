@@ -10,14 +10,23 @@ const Hero = () => {
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
 
-  // 🔥 Autocomplete Suggestions
+  // 🔥 AUTOCOMPLETE (Title + Category)
   const suggestions = useMemo(() => {
     if (!query.trim()) return [];
-    return events
-      .filter((event) =>
-        event.title.toLowerCase().includes(query.toLowerCase())
-      )
-      .slice(0, 5);
+
+    const lowerQuery = query.toLowerCase();
+
+    const titleMatches = events.filter((event) =>
+      event.title.toLowerCase().includes(lowerQuery)
+    );
+
+    const categoryMatches = events.filter((event) =>
+      event.category.toLowerCase().includes(lowerQuery)
+    );
+
+    const combined = [...new Set([...titleMatches, ...categoryMatches])];
+
+    return combined.slice(0, 5);
   }, [query]);
 
   const handleSearch = () => {
@@ -38,6 +47,7 @@ const Hero = () => {
         }}
       >
         <div className="absolute inset-0 bg-black/50" />
+
         <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 text-center text-white">
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
             Discover experiences <br />
@@ -51,7 +61,7 @@ const Hero = () => {
 
           <div className="mt-10 bg-white rounded-full shadow-2xl p-3 flex flex-col md:flex-row items-center gap-3 max-w-4xl mx-auto relative">
 
-            {/* SEARCH INPUT */}
+            {/* SEARCH */}
             <div className="flex items-center gap-2 px-4 flex-1 text-gray-600 relative">
               <Search size={18} />
               <input
@@ -62,6 +72,7 @@ const Hero = () => {
                 className="w-full outline-none"
               />
 
+              {/* AUTOCOMPLETE DROPDOWN */}
               {suggestions.length > 0 && (
                 <div className="absolute top-12 left-0 w-full bg-white shadow-lg rounded-xl z-50">
                   {suggestions.map((event) => (
@@ -71,6 +82,9 @@ const Hero = () => {
                       className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
                     >
                       {event.title}
+                      <span className="text-xs text-gray-400 ml-2">
+                        ({event.category})
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -111,6 +125,7 @@ const Hero = () => {
             >
               Search
             </button>
+
           </div>
         </div>
       </div>
