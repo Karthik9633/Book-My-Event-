@@ -6,6 +6,7 @@ import ResultsHeader from "../components/ResultsHeader";
 import Pagination from "../components/Pagination";
 import { events } from "../data/events";
 
+
 const EVENTS_PER_PAGE = 6;
 
 const SearchResults = () => {
@@ -25,7 +26,7 @@ const SearchResults = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState("recommended");
 
-  // 🔥 FILTER
+  // 🔥 FILTER (Title + Category + Location)
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       const { categories, price } = appliedFilters;
@@ -36,9 +37,11 @@ const SearchResults = () => {
 
       const priceMatch = event.price <= price;
 
-      const queryMatch = event.title
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
+      const lowerQuery = searchQuery.toLowerCase();
+
+      const queryMatch =
+        event.title.toLowerCase().includes(lowerQuery) ||
+        event.category.toLowerCase().includes(lowerQuery);
 
       const locationMatch = event.location
         .toLowerCase()
@@ -72,6 +75,7 @@ const SearchResults = () => {
 
   return (
     <div className="flex flex-col lg:flex-row">
+
       <FilterSidebar
         appliedFilters={appliedFilters}
         setAppliedFilters={(filters) => {
@@ -81,6 +85,7 @@ const SearchResults = () => {
       />
 
       <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-gray-50">
+
         <ResultsHeader
           total={sortedEvents.length}
           currentPage={currentPage}
@@ -111,6 +116,7 @@ const SearchResults = () => {
             setCurrentPage={setCurrentPage}
           />
         )}
+
       </div>
     </div>
   );
