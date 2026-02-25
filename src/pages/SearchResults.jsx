@@ -5,11 +5,19 @@ import EventGridCard from "../components/EventGridCard";
 import ResultsHeader from "../components/ResultsHeader";
 import Pagination from "../components/Pagination";
 import { events } from "../data/events";
-
+import { useEffect } from "react";
 
 const EVENTS_PER_PAGE = 6;
 
 const SearchResults = () => {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
   const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get("q") || "";
