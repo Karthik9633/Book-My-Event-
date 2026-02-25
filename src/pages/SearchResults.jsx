@@ -1,26 +1,31 @@
 import { useState, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import FilterSidebar from "../components/FilterSidebar";
 import EventGridCard from "../components/EventGridCard";
 import ResultsHeader from "../components/ResultsHeader";
-import { events } from "../data/events";
 import Pagination from "../components/Pagination";
+import { events } from "../data/events";
 
 const EVENTS_PER_PAGE = 6;
 
 const SearchResults = () => {
+  const [searchParams] = useSearchParams();
+
+  const searchQuery = searchParams.get("q") || "";
+  const searchLocation = searchParams.get("location") || "";
 
   const [appliedFilters, setAppliedFilters] = useState({
     categories: ["All Events"],
     startDate: "",
     endDate: "",
-    price: 1000,
+    price: 10000,
     venue: ""
   });
 
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState("recommended");
 
-  // FILTER
+  // 🔥 FILTER
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       const { categories, price } = appliedFilters;
@@ -31,11 +36,19 @@ const SearchResults = () => {
 
       const priceMatch = event.price <= price;
 
-      return categoryMatch && priceMatch;
-    });
-  }, [appliedFilters]);
+      const queryMatch = event.title
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
 
-  // SORT
+      const locationMatch = event.location
+        .toLowerCase()
+        .includes(searchLocation.toLowerCase());
+
+      return categoryMatch && priceMatch && queryMatch && locationMatch;
+    });
+  }, [appliedFilters, searchQuery, searchLocation]);
+
+  // 🔥 SORT
   const sortedEvents = useMemo(() => {
     const sorted = [...filteredEvents];
 
@@ -59,7 +72,6 @@ const SearchResults = () => {
 
   return (
     <div className="flex flex-col lg:flex-row">
-
       <FilterSidebar
         appliedFilters={appliedFilters}
         setAppliedFilters={(filters) => {
@@ -69,7 +81,6 @@ const SearchResults = () => {
       />
 
       <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-gray-50">
-
         <ResultsHeader
           total={sortedEvents.length}
           currentPage={currentPage}
@@ -100,9 +111,7 @@ const SearchResults = () => {
             setCurrentPage={setCurrentPage}
           />
         )}
-
       </div>
-
     </div>
   );
 };
