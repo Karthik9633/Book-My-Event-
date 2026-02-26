@@ -10,7 +10,7 @@ export const ToastProvider = ({ children }) => {
 
     setTimeout(() => {
       setToast(null);
-    }, 2500);
+    }, 5000);
   };
 
   return (
