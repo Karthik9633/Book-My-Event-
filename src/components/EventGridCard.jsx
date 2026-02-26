@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-import 'primeicons/primeicons.css';
-import { useState } from "react";
+import "primeicons/primeicons.css";
+import { useFavorites } from "../context/FavoritesContext";
 
 const EventGridCard = ({ event }) => {
-  const [saved, setSaved] = useState(false);
+  const { toggleFavorite, isFavorite } = useFavorites();
+
+  const saved = isFavorite(event.id);
+
   return (
     <div className="bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition">
 
@@ -14,16 +17,19 @@ const EventGridCard = ({ event }) => {
           className="w-full h-48 object-cover"
         />
 
-
         <span className="absolute bottom-3 left-3 bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full font-semibold">
           {event.category}
         </span>
 
         <button
-          onClick={() => setSaved(!saved)}
+          onClick={() => toggleFavorite(event)}
           className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:scale-110 transition"
         >
-          {saved ? <i className="pi pi-heart-fill"></i> : <i className="pi pi-heart"></i>}
+          {saved ? (
+            <i className="pi pi-heart-fill text-red-500"></i>
+          ) : (
+            <i className="pi pi-heart text-gray-600"></i>
+          )}
         </button>
       </div>
 
