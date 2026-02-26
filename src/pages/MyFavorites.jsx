@@ -4,10 +4,18 @@ import { useFavorites } from "../context/FavoritesContext";
 import { useState } from "react";
 import { LayoutGrid, List } from "lucide-react";
 import Pagination from "../components/Pagination";
+import { useEffect } from "react";
 
 const EVENTS_PER_PAGE = 6;
 
 const MyFavorites = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
   const { favorites } = useFavorites();
   const [view, setView] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
