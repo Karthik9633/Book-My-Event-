@@ -1,34 +1,37 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 const FavoritesContext = createContext();
 
 export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState(() => {
-    const stored = localStorage.getItem("favorites");
-    return stored ? JSON.parse(stored) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+  const [favorites, setFavorites] = useState([]);
 
   const toggleFavorite = (event) => {
-    const exists = favorites.find((item) => item.id === event.id);
+    setFavorites((prev) => {
+      const exists = prev.find((e) => e.id === event.id);
+      if (exists) {
+        return prev.filter((e) => e.id !== event.id);
+      } else {
+        return [...prev, event];
+      }
+    });
+  };
 
-    if (exists) {
-      setFavorites(favorites.filter((item) => item.id !== event.id));
-    } else {
-      setFavorites([...favorites, event]);
-    }
+  const removeFavorite = (id) => {
+    setFavorites((prev) => prev.filter((event) => event.id !== id));
   };
 
   const isFavorite = (id) => {
-    return favorites.some((item) => item.id === id);
+    return favorites.some((event) => event.id === id);
   };
 
   return (
     <FavoritesContext.Provider
-      value={{ favorites, toggleFavorite, isFavorite }}
+      value={{
+        favorites,
+        toggleFavorite,
+        removeFavorite,
+        isFavorite
+      }}
     >
       {children}
     </FavoritesContext.Provider>
