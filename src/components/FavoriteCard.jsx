@@ -1,45 +1,60 @@
-import { Heart, Calendar, MapPin } from "lucide-react";
+import { useFavorites } from "../context/FavoritesContext";
+import { Link } from "react-router-dom";
+import 'primeicons/primeicons.css';
 
 const FavoriteCard = ({ event }) => {
-  return (
-    <div className="bg-white rounded-3xl shadow-sm overflow-hidden hover:shadow-md transition">
+  const { removeFavorite } = useFavorites();
 
-      {/* IMAGE */}
+  return (
+    <div className="bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition">
+
       <div className="relative">
         <img
           src={event.image}
           alt={event.title}
-          className="w-full h-52 object-cover"
+          className="w-full h-48 object-cover"
         />
 
-        <button className="absolute top-4 right-4 bg-white p-2 rounded-full shadow">
-          <Heart size={18} className="text-red-500 fill-red-500" />
-        </button>
-
-        <span className="absolute bottom-4 left-4 bg-purple-600 text-white text-xs px-4 py-1 rounded-full">
+        <span className="absolute bottom-3 left-3 bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full font-semibold">
           {event.category}
         </span>
+
+        <button
+          onClick={() => removeFavorite(event.id)}
+          className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:scale-110 transition"
+        >
+          <i className="pi pi-heart-fill text-red-500"></i>
+        </button>
       </div>
 
-      {/* DETAILS */}
-      <div className="p-6">
-
-        <h3 className="font-bold text-lg mb-3">
+      <div className="p-5">
+        <h3 className="font-bold text-lg mb-2">
           {event.title}
         </h3>
 
-        <div className="text-sm text-gray-500 space-y-2">
-          <div className="flex items-center gap-2">
-            <Calendar size={14} />
-            {event.date}
+        <p className="text-sm text-gray-500">
+          {event.date}
+        </p>
+
+        <p className="text-sm text-gray-500 mb-4">
+          {event.location}
+        </p>
+
+        <div className="flex justify-between items-center">
+          <div>
+            <p className="text-xs text-gray-400">Tickets from</p>
+            <p className="font-bold text-lg">
+              ${event.price}
+            </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <MapPin size={14} />
-            {event.location}
-          </div>
+          <Link
+            to={`/event/${event.id}`}
+            className="bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-600 transition"
+          >
+            View Details
+          </Link>
         </div>
-
       </div>
     </div>
   );
