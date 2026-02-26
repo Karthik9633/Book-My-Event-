@@ -9,23 +9,26 @@ const UpcomingSection = () => {
 
   const nextEvents = () => {
     if (startIndex + itemsPerPage < events.length) {
-      setStartIndex(startIndex + itemsPerPage);
+      setStartIndex((prev) => prev + itemsPerPage);
     }
   };
 
   const prevEvents = () => {
     if (startIndex - itemsPerPage >= 0) {
-      setStartIndex(startIndex - itemsPerPage);
+      setStartIndex((prev) => prev - itemsPerPage);
     }
   };
 
+  const isPrevDisabled = startIndex === 0;
+  const isNextDisabled =
+    startIndex + itemsPerPage >= events.length;
+
   return (
-    <div className="max-w-7xl mx-auto px-10 mb-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mb-20">
 
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
 
-        {/* Left Title */}
         <div>
           <h2 className="text-2xl font-bold text-gray-900">
             Upcoming Events
@@ -35,33 +38,48 @@ const UpcomingSection = () => {
           </p>
         </div>
 
-        {/* Right Navigation Arrows */}
+        {/* Arrows */}
         <div className="flex gap-3">
+
           <button
             onClick={prevEvents}
-            className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center bg-white shadow-sm hover:bg-gray-100 transition"
-          style={{ fontSize: '1.5rem' }}>
+            disabled={isPrevDisabled}
+            className={`w-10 h-10 rounded-full border flex items-center justify-center shadow-sm transition text-xl
+              ${
+                isPrevDisabled
+                  ? "bg-gray-100 text-gray-300 cursor-not-allowed"
+                  : "bg-white hover:bg-gray-100"
+              }`}
+          >
             ‹
           </button>
 
           <button
             onClick={nextEvents}
-            className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center bg-white shadow-sm hover:bg-gray-100 transition"
-          style={{ fontSize: '1.5rem' }}>
+            disabled={isNextDisabled}
+            className={`w-10 h-10 rounded-full border flex items-center justify-center shadow-sm transition text-xl
+              ${
+                isNextDisabled
+                  ? "bg-gray-100 text-gray-300 cursor-not-allowed"
+                  : "bg-white hover:bg-gray-100"
+              }`}
+          >
             ›
           </button>
-        </div>
 
+        </div>
       </div>
 
       {/* Events Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {events.slice(startIndex, startIndex + itemsPerPage).map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
+        {events
+          .slice(startIndex, startIndex + itemsPerPage)
+          .map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))}
       </div>
 
-      {/* Load More Button */}
+      {/* Load More */}
       <div className="flex justify-center mt-10">
         <Link
           to="/search"
@@ -70,7 +88,6 @@ const UpcomingSection = () => {
           Load More Events
         </Link>
       </div>
-
     </div>
   );
 };
