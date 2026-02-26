@@ -10,8 +10,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 37.7749,
-  lng: -122.4194
+  lat: 9.9312,
+  lng: 76.2673
 };
 
 const MapView = ({ events }) => {
