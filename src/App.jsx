@@ -8,6 +8,7 @@ import MapPage from "./pages/MapPage";
 import SearchResults from "./pages/SearchResults";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import MyFavorites from "./pages/MyFavorites";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/search" element={<SearchResults />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/favorites" element={<MyFavorites />} />
       </Routes>
     </Layout>
   );
