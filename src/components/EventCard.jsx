@@ -1,76 +1,79 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import 'primeicons/primeicons.css';
+import "primeicons/primeicons.css";
+import { useFavorites } from "../context/FavoritesContext";
 
-const EventCard = ({ event }) => {
-    const [saved, setSaved] = useState(false);
+const EventGridCard = ({ event }) => {
+  const { toggleFavorite, isFavorite } = useFavorites();
 
-    return (
-        <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
+  const saved = isFavorite(event.id);
 
-            {/* IMAGE SECTION */}
-            <div className="relative h-48 overflow-hidden">
-                <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+  return (
+    <div className="bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition">
 
-                {/* CATEGORY BADGE */}
-                <span className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold text-primary">
-                    {event.category}
-                </span>
+      {/* IMAGE SECTION */}
+      <div className="relative">
+        <img
+          src={event.image}
+          alt={event.title}
+          className="w-full h-48 object-cover"
+        />
 
-                
-                <button
-                    onClick={() => setSaved(!saved)}
-                    className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:scale-110 transition"
-                >
-                    {saved ? <i className="pi pi-bookmark-fill"></i>:<i className="pi pi-bookmark"></i>}
-                </button>
-            </div>
+        {/* CATEGORY BADGE */}
+        <span className="absolute bottom-3 left-3 bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full font-semibold">
+          {event.category}
+        </span>
 
-            {/* CONTENT SECTION */}
-            <div className="p-5">
+        {/* HEART BUTTON */}
+        <button
+          onClick={() => toggleFavorite(event)}
+          className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:scale-110 transition"
+        >
+          {saved ? (
+            <i className="pi pi-heart-fill text-red-500"></i>
+          ) : (
+            <i className="pi pi-heart text-gray-700"></i>
+          )}
+        </button>
+      </div>
 
-                {/* TITLE */}
-                <h3 className="text-lg font-bold mb-3 group-hover:text-primary transition">
-                    {event.title}
-                </h3>
+      {/* CONTENT */}
+      <div className="p-5">
 
-                {/* DATE */}
-                <div className="text-sm text-gray-500 mb-1 flex justify-between">
-                    <span>📅 {event.date}</span>
-                </div>
+        <h3 className="font-bold text-lg mb-2">
+          {event.title}
+        </h3>
 
-                {/* LOCATION */}
-                <div className="text-sm text-gray-500 mb-4">
-                    📍 {event.location}
-                </div>
+        <p className="text-sm text-gray-500">
+          {event.date}
+        </p>
 
-                {/* PRICE + BUTTON */}
-                <div className="flex justify-between items-center">
+        <p className="text-sm text-gray-500 mb-4">
+          {event.location}
+        </p>
 
-                    <div>
-                        <p className="text-xs text-gray-400 uppercase">
-                            Tickets from
-                        </p>
-                        <p className="text-lg font-bold text-primary">
-                            {event.price === 0 ? "Free" : `$${event.price}`}
-                        </p>
-                    </div>
+        <div className="flex justify-between items-center">
 
-                    <Link
-                        to={`/event/${event.id}`}
-                        className="px-4 py-2 bg-indigo-700 text-white rounded-lg font-semibold hover:bg-primary transition"
-                    >
-                        View Details
-                    </Link>
+          {/* PRICE */}
+          <div>
+            <p className="text-xs text-gray-400">Tickets from</p>
+            <p className="font-bold text-lg">
+              ${event.price}
+            </p>
+          </div>
 
-                </div>
-            </div>
+          {/* VIEW BUTTON */}
+          <Link
+            to={`/event/${event.id}`}
+            className="bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-600 transition"
+          >
+            View
+          </Link>
+
         </div>
-    );
+      </div>
+
+    </div>
+  );
 };
 
-export default EventCard;
+export default EventGridCard;
