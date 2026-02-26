@@ -4,13 +4,17 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 import { FavoritesProvider } from "./context/FavoritesContext"
+import { ToastProvider } from "./context/ToastContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <FavoritesProvider>
-        <App />
-      </FavoritesProvider>
+      <ToastProvider>
+        <FavoritesProvider>
+          <App />
+
+        </FavoritesProvider>
+      </ToastProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
