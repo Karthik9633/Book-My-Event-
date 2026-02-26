@@ -18,6 +18,7 @@ const Navbar = () => {
           <Link to="/">Discover</Link>
           <Link to="/search">Events</Link>
           <Link to="/map">Map</Link>
+          <Link to="/favorites">My Favorites</Link>
         </div>
 
         
