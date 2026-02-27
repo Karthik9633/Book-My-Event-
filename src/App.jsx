@@ -9,6 +9,7 @@ import SearchResults from "./pages/SearchResults";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MyFavorites from "./pages/MyFavorites";
+import RegistrationSuccess from "./pages/RegistrationSuccess";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/favorites" element={<MyFavorites />} />
+        <Route path="/success/:id" element={<RegistrationSuccess/>} />
       </Routes>
     </Layout>
   );
