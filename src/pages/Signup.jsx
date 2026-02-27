@@ -1,9 +1,20 @@
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext"; // ✅ added
+import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 
 const Signup = () => {
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
+    }, []);
+
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -11,8 +22,8 @@ const Signup = () => {
     const [terms, setTerms] = useState(false);
     const [errors, setErrors] = useState({});
 
-    const { signup } = useAuth(); // ✅ added
-    const navigate = useNavigate(); // ✅ added
+    const { signup } = useAuth();
+    const navigate = useNavigate();
 
     const validate = (field, value) => {
         let newErrors = { ...errors };
@@ -72,12 +83,15 @@ const Signup = () => {
         !errors.password &&
         !errors.terms;
 
-    // ✅ ONLY THIS LOGIC ADDED
+    
     const handleSignup = () => {
         if (!isFormValid) return;
 
-        signup(name, email, password); // store user
-        navigate("/"); // redirect to home
+        const success = signup(name, email, password);
+
+        if (success) {
+            navigate("/login")
+        }
     };
 
     return (
@@ -215,11 +229,13 @@ const Signup = () => {
                         </p>
                     )}
 
-                    {/* ONLY onClick ADDED */}
+                    {/* BUTTON */}
                     <button
                         onClick={handleSignup}
                         disabled={!isFormValid}
-                        className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold shadow-lg transition ${!isFormValid ? "opacity-50 cursor-not-allowed" : ""
+                        className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold shadow-lg transition ${!isFormValid
+                            ? "opacity-50 cursor-not-allowed"
+                            : ""
                             }`}
                     >
                         Create Account
@@ -231,6 +247,7 @@ const Signup = () => {
                             Login
                         </Link>
                     </p>
+
                 </div>
             </div>
         </div>
