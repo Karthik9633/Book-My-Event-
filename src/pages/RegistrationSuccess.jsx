@@ -183,7 +183,7 @@ const RegistrationSuccess = () => {
                     </div>
 
                     <Link
-                        to="/favorites"
+                        to="/mytickets"
                         className="w-full flex items-center justify-center gap-2 bg-purple-600 text-white py-4 rounded-full font-semibold shadow-lg hover:opacity-95 transition"
                     >
                         <Eye size={18} />
