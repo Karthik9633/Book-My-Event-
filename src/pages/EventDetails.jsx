@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { events } from "../data/events";
 import { useState, useEffect } from "react";
 import EventMap from "../components/EventMap";
+import { Link } from "react-router-dom";
 
 const EventDetails = () => {
     
@@ -213,9 +214,9 @@ const EventDetails = () => {
                     </div>
 
 
-                    <button className="w-full bg-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:opacity-90 transition">
+                    <Link to="/login" className="w-full bg-purple-600 text-white px-3 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition">
                         Register Now
-                    </button>
+                    </Link>
 
                     <p className="text-xs text-gray-400 text-center mt-4">
                         No hidden fees • Full refund up to 7 days before
