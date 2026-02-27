@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }) => {
         return JSON.parse(localStorage.getItem("loggedUser")) || null;
     });
 
-    // ✅ SIGNUP (ONLY SAVE USER, DO NOT LOGIN)
     const signup = (name, email, password) => {
         const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -25,9 +24,9 @@ export const AuthProvider = ({ children }) => {
 
         localStorage.setItem("users", JSON.stringify([...users, newUser]));
 
-        showToast("Your account was created successfully", "success");
+        showToast("✅ Your account was created successfully", "success");
 
-        return true; // IMPORTANT
+        return true; 
     };
 
     // ✅ LOGIN
@@ -46,7 +45,7 @@ export const AuthProvider = ({ children }) => {
         setUser(matchedUser);
         localStorage.setItem("loggedUser", JSON.stringify(matchedUser));
 
-        showToast("Login successful", "success");
+        showToast("✅Login successful", "success");
 
         return true;
     };
