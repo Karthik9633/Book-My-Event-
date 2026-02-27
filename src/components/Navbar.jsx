@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { useAuth } from "../context/AuthContext"; 
+import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useAuth(); 
+  const { user, logout } = useAuth();
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50 py-2">
@@ -17,10 +18,49 @@ const Navbar = () => {
         </h1>
 
         <div className="hidden md:flex space-x-8 font-medium">
-          <Link to="/">Discover</Link>
-          <Link to="/search">Events</Link>
-          <Link to="/map">Map</Link>
-          <Link to="/favorites">My Favorites</Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? "text-purple-600 font-semibold border-b-2 border-purple-600 pb-1"
+                : "hover:text-purple-600 transition"
+            }
+          >
+            Discover
+          </NavLink>
+
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              isActive
+                ? "text-purple-600 font-semibold border-b-2 border-purple-600 pb-1"
+                : "hover:text-purple-600 transition"
+            }
+          >
+            Events
+          </NavLink>
+
+          <NavLink
+            to="/map"
+            className={({ isActive }) =>
+              isActive
+                ? "text-purple-600 font-semibold border-b-2 border-purple-600 pb-1"
+                : "hover:text-purple-600 transition"
+            }
+          >
+            Map
+          </NavLink>
+
+          <NavLink
+            to="/favorites"
+            className={({ isActive }) =>
+              isActive
+                ? "text-purple-600 font-semibold border-b-2 border-purple-600 pb-1"
+                : "hover:text-purple-600 transition"
+            }
+          >
+            My Favorites
+          </NavLink>
         </div>
 
         {/* AUTH SECTION*/}
