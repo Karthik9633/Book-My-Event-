@@ -17,7 +17,7 @@ const EventDetails = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
-    const { user } = useAuth(); // ✅ added only this
+    const { user, registerTicket } = useAuth(); // ✅ added only this
 
     const event = events.find((e) => e.id === Number(id));
 
@@ -53,19 +53,33 @@ const EventDetails = () => {
         ? Number(selectedTier.price) * Number(quantity)
         : 0;
 
-    // ✅ ONLY THIS LOGIC ADDED
     const handleRegister = () => {
         if (!user) {
             navigate("/login");
-        } else {
-            navigate(`/success/${event.id}`, {
-                state: {
-                    tier: selectedTier,
-                    quantity,
-                    total: totalPrice
-                }
-            });
+            return;
         }
+
+        const ticketData = {
+            id: Date.now(),
+            eventId: event.id,
+            eventTitle: event.title,
+            image: event.image,
+            date: event.date,
+            location: event.location,
+            tier: selectedTier,
+            quantity,
+            total: totalPrice,
+        };
+
+        registerTicket(ticketData);
+
+        navigate(`/success/${event.id}`, {
+            state: {
+                tier: selectedTier,
+                quantity,
+                total: totalPrice,
+            },
+        });
     };
 
     return (
