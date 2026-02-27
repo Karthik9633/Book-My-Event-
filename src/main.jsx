@@ -5,15 +5,17 @@ import App from "./App";
 import "./index.css";
 import { FavoritesProvider } from "./context/FavoritesContext"
 import { ToastProvider } from "./context/ToastContext";
+import { AuthProvider } from "./context/AuthContext"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <ToastProvider>
-        <FavoritesProvider>
-          <App />
-
-        </FavoritesProvider>
+        <AuthProvider>
+          <FavoritesProvider>
+            <App />
+          </FavoritesProvider>
+        </AuthProvider>
       </ToastProvider>
     </BrowserRouter>
   </React.StrictMode>
