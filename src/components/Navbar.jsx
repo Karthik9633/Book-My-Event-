@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate,NavLink } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
@@ -13,12 +13,15 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50 py-2">
 
+      {/* TOP NAV */}
       <div className="px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center">
 
+        {/* LOGO */}
         <h1 className="text-2xl font-bold text-purple-600">
           BookMyEvent
         </h1>
 
+        {/* DESKTOP LINKS */}
         <div className="hidden md:flex space-x-8 font-medium">
           <NavLink
             to="/"
@@ -65,9 +68,11 @@ const Navbar = () => {
           </NavLink>
         </div>
 
+        {/* RIGHT SIDE */}
         <div className="hidden md:flex gap-3 relative">
           {user ? (
             <>
+              {/* PROFILE CIRCLE */}
               <div
                 onClick={() => setDropdown(!dropdown)}
                 className="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center cursor-pointer font-bold"
@@ -75,6 +80,7 @@ const Navbar = () => {
                 {user.name.charAt(0).toUpperCase()}
               </div>
 
+              {/* DROPDOWN */}
               {dropdown && (
                 <div className="absolute right-0 top-14 bg-white shadow-lg rounded-xl w-40 py-2">
                   <button
@@ -101,16 +107,23 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link to="/login" className="bg-purple-600 text-white px-5 py-2 rounded-full">
+              <Link
+                to="/login"
+                className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition"
+              >
                 Login
               </Link>
-              <Link to="/signup" className="bg-purple-600 text-white px-5 py-2 rounded-full">
+              <Link
+                to="/signup"
+                className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition"
+              >
                 Sign Up
               </Link>
             </>
           )}
         </div>
 
+        {/* HAMBURGER BUTTON */}
         <button
           className="md:hidden"
           onClick={() => setIsOpen(!isOpen)}
@@ -119,6 +132,92 @@ const Navbar = () => {
         </button>
 
       </div>
+
+      {/* MOBILE MENU */}
+      <div
+        className={`md:hidden transition-all duration-300 overflow-hidden ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+          }`}
+      >
+        <div className="px-6 pb-6 flex flex-col gap-4 bg-white shadow-lg">
+
+          <NavLink
+            to="/"
+            onClick={() => setIsOpen(false)}
+            className="font-medium"
+          >
+            Discover
+          </NavLink>
+
+          <NavLink
+            to="/search"
+            onClick={() => setIsOpen(false)}
+            className="font-medium"
+          >
+            Events
+          </NavLink>
+
+          <NavLink
+            to="/map"
+            onClick={() => setIsOpen(false)}
+            className="font-medium"
+          >
+            Map
+          </NavLink>
+
+          <NavLink
+            to="/favorites"
+            onClick={() => setIsOpen(false)}
+            className="font-medium"
+          >
+            My Favorites
+          </NavLink>
+
+          {user ? (
+            <>
+              <button
+                onClick={() => {
+                  navigate("/mytickets");
+                  setIsOpen(false);
+                }}
+                className="text-left font-medium"
+              >
+                My Tickets
+              </button>
+
+              <button
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                  setIsOpen(false);
+                }}
+                className="text-left text-red-500 font-medium"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                onClick={() => setIsOpen(false)}
+                className="bg-purple-600 text-white px-4 py-2 rounded-full text-center"
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/signup"
+                onClick={() => setIsOpen(false)}
+                className="bg-purple-600 text-white px-4 py-2 rounded-full text-center"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
+
+        </div>
+      </div>
+
     </nav>
   );
 };
