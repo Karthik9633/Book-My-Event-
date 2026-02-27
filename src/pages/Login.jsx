@@ -1,6 +1,7 @@
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import 'primeicons/primeicons.css';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -157,11 +158,10 @@ const Login = () => {
           {/* BUTTON */}
           <button
             disabled={!isFormValid}
-            className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold shadow-lg transition ${
-              !isFormValid
+            className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold shadow-lg transition ${!isFormValid
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:opacity-95"
-            }`}
+              }`}
           >
             Sign In →
           </button>
@@ -173,10 +173,10 @@ const Login = () => {
 
           <div className="flex gap-4">
             <button className="flex-1 border rounded-full py-3 bg-white">
-              Google
+              <i className="pi pi-google" style={{ fontSize: '1rem' }}></i>    Google
             </button>
             <button className="flex-1 border rounded-full py-3 bg-white">
-              Apple
+              <i className="pi pi-apple" style={{ fontSize: '1rem' }}></i>     Apple
             </button>
           </div>
 
