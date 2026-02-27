@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { useAuth } from "../context/AuthContext"; // ✅ added
+import { useAuth } from "../context/AuthContext"; 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useAuth(); // ✅ added
+  const { user, logout } = useAuth(); 
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50 py-2">
@@ -23,7 +23,7 @@ const Navbar = () => {
           <Link to="/favorites">My Favorites</Link>
         </div>
 
-        {/* ✅ AUTH SECTION UPDATED */}
+        {/* AUTH SECTION*/}
         <div className="hidden md:flex gap-3 items-center">
 
           {!user ? (
@@ -45,7 +45,7 @@ const Navbar = () => {
               {/* Logout Button */}
               <button
                 onClick={logout}
-                className="bg-gray-200 px-5 py-2 rounded-full hover:bg-gray-300 transition"
+                className="bg-red-500 text-white px-5 py-2 rounded-full hover:bg-red-700 transition"
               >
                 Logout
               </button>
@@ -107,8 +107,7 @@ const Navbar = () => {
               </div>
 
               <button
-                onClick={logout}
-                className="w-full bg-red-700 text-white px-5 py-2 rounded-full hover:bg-gray-300 transition"
+                onClick={logout} className="w-full bg-red-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition"
               >
                 Logout
               </button>
