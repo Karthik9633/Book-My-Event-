@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
@@ -20,10 +20,49 @@ const Navbar = () => {
         </h1>
 
         <div className="hidden md:flex space-x-8 font-medium">
-          <Link to="/">Discover</Link>
-          <Link to="/search">Events</Link>
-          <Link to="/map">Map</Link>
-          <Link to="/favorites">My Favorites</Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? "text-purple-600 font-semibold border-b-2 border-purple-600 pb-1"
+                : "hover:text-purple-600 transition"
+            }
+          >
+            Discover
+          </NavLink>
+
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              isActive
+                ? "text-purple-600 font-semibold border-b-2 border-purple-600 pb-1"
+                : "hover:text-purple-600 transition"
+            }
+          >
+            Events
+          </NavLink>
+
+          <NavLink
+            to="/map"
+            className={({ isActive }) =>
+              isActive
+                ? "text-purple-600 font-semibold border-b-2 border-purple-600 pb-1"
+                : "hover:text-purple-600 transition"
+            }
+          >
+            Map
+          </NavLink>
+
+          <NavLink
+            to="/favorites"
+            className={({ isActive }) =>
+              isActive
+                ? "text-purple-600 font-semibold border-b-2 border-purple-600 pb-1"
+                : "hover:text-purple-600 transition"
+            }
+          >
+            My Favorites
+          </NavLink>
         </div>
 
         <div className="hidden md:flex gap-3 relative">
