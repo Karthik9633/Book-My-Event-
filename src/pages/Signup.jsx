@@ -106,7 +106,7 @@ const Signup = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-purple-700/80 to-purple-900/90 flex flex-col justify-center p-16 text-white">
                     <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3">
-                        🎉 BookMyEvent
+                         BookMyEvent
                     </h2>
 
                     <h1 className="text-5xl font-bold leading-tight mb-6">
@@ -147,7 +147,7 @@ const Signup = () => {
                                     setName(e.target.value);
                                     validate("name", e.target.value);
                                 }}
-                                placeholder="John Doe"
+                                placeholder="Enter Your Name"
                                 className="w-full outline-none bg-transparent"
                             />
                         </div>
