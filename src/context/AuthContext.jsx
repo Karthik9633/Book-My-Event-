@@ -1,64 +1,89 @@
-import { createContext, useContext, useState } from "react";
-import { useToast } from "./ToastContext";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const { showToast } = useToast();
 
-    const [user, setUser] = useState(() => {
-        return JSON.parse(localStorage.getItem("loggedUser")) || null;
-    });
+    // 🔐 Logged In User
+    const [user, setUser] = useState(
+        JSON.parse(localStorage.getItem("user")) || null
+    );
 
+    // 🎟 Registered Tickets
+    const [tickets, setTickets] = useState(
+        JSON.parse(localStorage.getItem("tickets")) || []
+    );
+
+    // ✅ Keep tickets synced
+    useEffect(() => {
+        localStorage.setItem("tickets", JSON.stringify(tickets));
+    }, [tickets]);
+
+    // ✅ Keep user synced
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
+        } else {
+            localStorage.removeItem("user");
+        }
+    }, [user]);
+
+    // =============================
+    // SIGNUP
+    // =============================
     const signup = (name, email, password) => {
         const users = JSON.parse(localStorage.getItem("users")) || [];
 
-        const userExists = users.find((u) => u.email === email);
+        const exists = users.find((u) => u.email === email);
+        if (exists) return false;
 
-        if (userExists) {
-            showToast("Email already registered", "error");
-            return false;
-        }
+        users.push({ name, email, password });
+        localStorage.setItem("users", JSON.stringify(users));
 
-        const newUser = { name, email, password };
-
-        localStorage.setItem("users", JSON.stringify([...users, newUser]));
-
-        showToast("✅ Your account was created successfully", "success");
-
-        return true; 
+        return true; // IMPORTANT
     };
 
-    // ✅ LOGIN
+    // =============================
+    // LOGIN
+    // =============================
     const login = (email, password) => {
         const users = JSON.parse(localStorage.getItem("users")) || [];
 
-        const matchedUser = users.find(
+        const found = users.find(
             (u) => u.email === email && u.password === password
         );
 
-        if (!matchedUser) {
-            showToast("Login failed. Invalid email or password", "error");
-            return false;
-        }
+        if (!found) return false;
 
-        setUser(matchedUser);
-        localStorage.setItem("loggedUser", JSON.stringify(matchedUser));
-
-        showToast("✅Login successful", "success");
-
+        setUser(found);
         return true;
     };
 
-    // ✅ LOGOUT
+    // =============================
+    // LOGOUT
+    // =============================
     const logout = () => {
         setUser(null);
-        localStorage.removeItem("loggedUser");
-        showToast("Logged out successfully", "success");
+    };
+
+    // =============================
+    // REGISTER TICKET
+    // =============================
+    const registerTicket = (ticketData) => {
+        setTickets((prev) => [...prev, ticketData]);
     };
 
     return (
-        <AuthContext.Provider value={{ user, signup, login, logout }}>
+        <AuthContext.Provider
+            value={{
+                user,
+                signup,
+                login,
+                logout,
+                tickets,
+                registerTicket,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );
