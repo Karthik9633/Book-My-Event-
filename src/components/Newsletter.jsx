@@ -1,11 +1,11 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { useToast } from "../context/ToastContext"; // adjust path if needed
+import { useToast } from "../context/ToastContext";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const { showToast } = useToast(); // your toast function
+  const { showToast } = useToast(); 
 
   const sendEmail = async (e) => {
     e.preventDefault();
