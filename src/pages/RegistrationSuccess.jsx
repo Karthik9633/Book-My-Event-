@@ -1,11 +1,13 @@
 import { CheckCircle, Download, Eye, Share2, Mail } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { events } from "../data/events";
 import { useAuth } from "../context/AuthContext";
+import { QRCodeCanvas } from "qrcode.react"; // ✅ added
 
 const RegistrationSuccess = () => {
     const { id } = useParams();
-    const { user } = useAuth(); // if you have auth
+    const location = useLocation();
+    const { user } = useAuth();
 
     const event = events.find((e) => e.id === Number(id));
 
@@ -17,8 +19,18 @@ const RegistrationSuccess = () => {
         );
     }
 
-    const quantity = 1;
-    const totalPrice = event.price * quantity;
+    const selectedTier = location.state?.tier;
+    const quantity = location.state?.quantity || 1;
+    const totalPrice = location.state?.total || event.price;
+
+    // ✅ Dummy QR value
+    const qrValue = `
+        Event: ${event.title}
+        Ticket: ${selectedTier?.name || "General Admission"}
+        Quantity: ${quantity}
+        User: ${user?.name || "Guest"}
+        Order: EV-${event.id}-2024
+    `;
 
     return (
         <div className="bg-gray-50 min-h-screen pt-28 pb-20">
@@ -85,7 +97,7 @@ const RegistrationSuccess = () => {
 
                                 <div>
                                     <p className="font-semibold text-gray-800">Ticket Type</p>
-                                    <p>General Admission</p>
+                                    <p>{selectedTier?.name || "General Admission"}</p>
                                 </div>
 
                                 <div>
@@ -96,7 +108,18 @@ const RegistrationSuccess = () => {
                             </div>
                         </div>
 
-                        <p className="text-xs text-gray-400 mt-6">
+                        {/* ✅ QR CODE ADDED */}
+                        <div className="flex justify-center mt-6">
+                            <QRCodeCanvas
+                                value={qrValue}
+                                size={120}
+                                bgColor="#ffffff"
+                                fgColor="#000000"
+                                level="H"
+                            />
+                        </div>
+
+                        <p className="text-xs text-gray-400 mt-4 text-center">
                             Please present this QR code at the main entrance for check-in.
                         </p>
 
@@ -116,24 +139,32 @@ const RegistrationSuccess = () => {
 
                             <div className="flex justify-between">
                                 <span>Ticket Type</span>
-                                <span className="font-medium text-gray-800">General Admission</span>
+                                <span className="font-medium text-gray-800">
+                                    {selectedTier?.name || "General Admission"}
+                                </span>
                             </div>
 
                             <div className="flex justify-between">
                                 <span>Quantity</span>
-                                <span className="font-medium text-gray-800">{quantity}</span>
+                                <span className="font-medium text-gray-800">
+                                    {quantity}
+                                </span>
                             </div>
 
                             <div className="flex justify-between">
                                 <span>Price</span>
-                                <span className="font-medium text-gray-800">${event.price}</span>
+                                <span className="font-medium text-gray-800">
+                                    ${selectedTier?.price || event.price}
+                                </span>
                             </div>
 
                             <hr />
 
                             <div className="flex justify-between font-bold text-lg">
                                 <span>Total Charged</span>
-                                <span className="text-purple-600">${totalPrice}</span>
+                                <span className="text-purple-600">
+                                    ${totalPrice}
+                                </span>
                             </div>
 
                         </div>
