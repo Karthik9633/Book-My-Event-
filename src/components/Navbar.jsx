@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useAuth } from "../context/AuthContext"; // ✅ added
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth(); // ✅ added
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50 py-2">
@@ -21,17 +23,38 @@ const Navbar = () => {
           <Link to="/favorites">My Favorites</Link>
         </div>
 
-        
-        <div className="hidden md:flex gap-3">
-          <Link to="/login" className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
-            Login
-          </Link>
-          <Link to="/signup" className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
-            Sign Up
-          </Link>
+        {/* ✅ AUTH SECTION UPDATED */}
+        <div className="hidden md:flex gap-3 items-center">
+
+          {!user ? (
+            <>
+              <Link to="/login" className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
+                Login
+              </Link>
+              <Link to="/signup" className="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
+                Sign Up
+              </Link>
+            </>
+          ) : (
+            <>
+              {/* Profile Circle */}
+              <div className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-semibold">
+                {user.name?.charAt(0).toUpperCase()}
+              </div>
+
+              {/* Logout Button */}
+              <button
+                onClick={logout}
+                className="bg-gray-200 px-5 py-2 rounded-full hover:bg-gray-300 transition"
+              >
+                Logout
+              </button>
+            </>
+          )}
+
         </div>
 
-       
+        {/* MOBILE BUTTON */}
         <button
           className="md:hidden"
           onClick={() => setIsOpen(!isOpen)}
@@ -41,45 +64,56 @@ const Navbar = () => {
 
       </div>
 
-
+      {/* MOBILE MENU */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-          isOpen ? "max-h-[500px]" : "max-h-0"
-        }`}
+        className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "max-h-[500px]" : "max-h-0"
+          }`}
       >
         <div className="px-6 pb-6 flex flex-col gap-4 bg-white shadow-lg">
 
-          <Link
-            to="/"
-            onClick={() => setIsOpen(false)}
-            className="font-medium"
-          >
+          <Link to="/" onClick={() => setIsOpen(false)} className="font-medium">
             Discover
           </Link>
 
-          <Link
-            to="/calendar"
-            onClick={() => setIsOpen(false)}
-            className="font-medium"
-          >
+          <Link to="/calendar" onClick={() => setIsOpen(false)} className="font-medium">
             Calendar
           </Link>
 
-          <Link
-            to="/map"
-            onClick={() => setIsOpen(false)}
-            className="font-medium"
-          >
+          <Link to="/map" onClick={() => setIsOpen(false)} className="font-medium">
             Map
           </Link>
 
-         <Link to="/login"> <button className=" w-full bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
-            Login
-          </button></Link>
+          {!user ? (
+            <>
+              <Link to="/login">
+                <button className="w-full bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
+                  Login
+                </button>
+              </Link>
 
-          <Link to="/signup"> <button className="w-full bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
-            Sign Up
-          </button></Link> 
+              <Link to="/signup">
+                <button className="w-full bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition">
+                  Sign Up
+                </button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-semibold">
+                  {user.name?.charAt(0).toUpperCase()}
+                </div>
+                <span className="font-medium">{user.name}</span>
+              </div>
+
+              <button
+                onClick={logout}
+                className="w-full bg-gray-200 px-5 py-2 rounded-full hover:bg-gray-300 transition"
+              >
+                Logout
+              </button>
+            </>
+          )}
 
         </div>
       </div>
