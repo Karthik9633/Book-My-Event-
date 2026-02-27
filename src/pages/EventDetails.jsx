@@ -2,10 +2,11 @@ import { useParams } from "react-router-dom";
 import { events } from "../data/events";
 import { useState, useEffect } from "react";
 import EventMap from "../components/EventMap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const EventDetails = () => {
-    
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -13,7 +14,11 @@ const EventDetails = () => {
             behavior: "auto",
         });
     }, []);
+
     const { id } = useParams();
+    const navigate = useNavigate();
+    const { user } = useAuth(); // ✅ added only this
+
     const event = events.find((e) => e.id === Number(id));
 
     const [timeLeft, setTimeLeft] = useState({
@@ -26,13 +31,11 @@ const EventDetails = () => {
     const [selectedTier, setSelectedTier] = useState(null);
     const [quantity, setQuantity] = useState(1);
 
-
     useEffect(() => {
         if (event?.ticketTiers?.length > 0) {
             setSelectedTier(event.ticketTiers[0]);
         }
     }, [event]);
-
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -50,13 +53,27 @@ const EventDetails = () => {
         ? selectedTier.price * quantity
         : 0;
 
+    // ✅ ONLY THIS LOGIC ADDED
+    const handleRegister = () => {
+        if (!user) {
+            navigate("/login");
+        } else {
+            navigate(`/success/${event.id}`, {
+                state: {
+                    tier: selectedTier,
+                    quantity,
+                    total: totalPrice
+                }
+            });
+        }
+    };
+
     return (
         <div className="bg-gray-50 min-h-screen pb-20">
 
             <div className="max-w-7xl mx-auto px-6 pt-6 text-sm text-gray-500">
                 Home › Events › {event.title}
             </div>
-
 
             <div className="max-w-7xl mx-auto px-6 mt-6">
                 <div className="rounded-3xl overflow-hidden shadow-lg">
@@ -68,9 +85,7 @@ const EventDetails = () => {
                 </div>
             </div>
 
-
             <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-10 grid lg:grid-cols-3 gap-10">
-
 
                 <div className="md:col-span-2">
 
@@ -88,7 +103,6 @@ const EventDetails = () => {
                             <p>{event.venueAddress}</p>
                         </div>
                     </div>
-
 
                     <div className="bg-purple-100 rounded-2xl p-6 mb-10">
                         <p className="text-sm font-bold text-purple-600 mb-4">
@@ -112,7 +126,6 @@ const EventDetails = () => {
                         </div>
                     </div>
 
-
                     <div className="bg-white p-6 rounded-2xl shadow-sm mb-10 flex justify-between items-center">
                         <div>
                             <p className="font-bold">{event.organizer}</p>
@@ -125,7 +138,6 @@ const EventDetails = () => {
                         </button>
                     </div>
 
-
                     <div className="mb-10">
                         <h2 className="text-2xl font-bold mb-4">
                             About this event
@@ -137,10 +149,7 @@ const EventDetails = () => {
 
                         <ul className="space-y-3 text-gray-600">
                             {event.highlights?.map((item, index) => (
-                                <li
-                                    key={index}
-                                    className="flex items-start gap-2"
-                                >
+                                <li key={index} className="flex items-start gap-2">
                                     <span className="text-purple-600 font-bold">
                                         ✔
                                     </span>
@@ -159,11 +168,10 @@ const EventDetails = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden shadow-md">
-                           <EventMap lat={event.lat} lng={event.lng} />
+                            <EventMap lat={event.lat} lng={event.lng} />
                         </div>
                     </div>
                 </div>
-
 
                 <div className="bg-white rounded-3xl shadow-lg p-6 sm:p-8 h-fit lg:sticky top-24">
 
@@ -197,7 +205,6 @@ const EventDetails = () => {
                         </select>
                     </div>
 
-
                     <div className="mb-6">
                         <label className="text-sm font-semibold">
                             Quantity
@@ -213,16 +220,18 @@ const EventDetails = () => {
                         />
                     </div>
 
-
-                    <Link to="/login" className="w-full bg-purple-600 text-white px-3 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition">
+                    {/* 🔥 SAME BUTTON STYLE, JUST ADDED onClick */}
+                    <button
+                        onClick={handleRegister}
+                        className="w-full bg-purple-600 text-white px-3 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition"
+                    >
                         Register Now
-                    </Link>
+                    </button>
 
                     <p className="text-xs text-gray-400 text-center mt-4">
                         No hidden fees • Full refund up to 7 days before
                     </p>
                 </div>
-
             </div>
         </div>
     );
