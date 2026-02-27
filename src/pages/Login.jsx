@@ -3,8 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import 'primeicons/primeicons.css';
+import { useEffect } from "react";
 
 const Login = () => {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -13,7 +23,7 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Validate Form (UNCHANGED)
+  // 🔹 VALIDATION (UNCHANGED)
   const validate = (field, value) => {
     let newErrors = { ...errors };
 
@@ -46,7 +56,7 @@ const Login = () => {
     !errors.email &&
     !errors.password;
 
-  // 🔥 LOGIN LOGIC ADDED
+  // 🔥 ONLY LOGIC ADDED
   const handleSubmit = () => {
     if (!isFormValid) return;
 
@@ -54,15 +64,12 @@ const Login = () => {
 
     if (success) {
       navigate("/");
-    } else {
-      alert("Invalid email or password");
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
 
-      {/* LEFT SIDE IMAGE */}
       <div className="hidden lg:flex lg:w-1/2 relative">
         <img
           src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30"
@@ -91,7 +98,6 @@ const Login = () => {
         </div>
       </div>
 
-      {/* RIGHT FORM */}
       <div className="flex-1 flex items-center justify-center px-6 py-16 bg-gray-50">
         <div className="w-full max-w-md">
 
@@ -100,7 +106,6 @@ const Login = () => {
             Please enter your details to sign in.
           </p>
 
-          {/* EMAIL */}
           <div className="mb-5">
             <label className="text-sm font-medium">Email Address</label>
             <div className="flex items-center border rounded-full px-4 py-3 mt-2 bg-white">
@@ -123,7 +128,6 @@ const Login = () => {
             )}
           </div>
 
-          {/* PASSWORD */}
           <div className="mb-6">
             <label className="text-sm font-medium">Password</label>
             <div className="flex items-center border rounded-full px-4 py-3 mt-2 bg-white">
@@ -139,17 +143,9 @@ const Login = () => {
                 className="w-full outline-none bg-transparent"
               />
               {showPassword ? (
-                <EyeOff
-                  size={18}
-                  className="cursor-pointer"
-                  onClick={() => setShowPassword(false)}
-                />
+                <EyeOff size={18} onClick={() => setShowPassword(false)} />
               ) : (
-                <Eye
-                  size={18}
-                  className="cursor-pointer"
-                  onClick={() => setShowPassword(true)}
-                />
+                <Eye size={18} onClick={() => setShowPassword(true)} />
               )}
             </div>
             {errors.password && (
@@ -159,13 +155,12 @@ const Login = () => {
             )}
           </div>
 
-          {/* BUTTON */}
           <button
             onClick={handleSubmit}
             disabled={!isFormValid}
             className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold shadow-lg transition ${!isFormValid
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:opacity-95"
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:opacity-95"
               }`}
           >
             Sign In →
