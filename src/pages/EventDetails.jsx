@@ -50,7 +50,7 @@ const EventDetails = () => {
     if (!event) return <div className="p-10">Event not found</div>;
 
     const totalPrice = selectedTier
-        ? selectedTier.price * quantity
+        ? Number(selectedTier.price) * Number(quantity)
         : 0;
 
     // ✅ ONLY THIS LOGIC ADDED
@@ -189,6 +189,7 @@ const EventDetails = () => {
                             Ticket Tier
                         </label>
                         <select
+                            value={selectedTier?.name || ""}
                             className="w-full border rounded-xl p-3 mt-2"
                             onChange={(e) => {
                                 const tier = event.ticketTiers.find(
@@ -214,7 +215,7 @@ const EventDetails = () => {
                             value={quantity}
                             min="1"
                             onChange={(e) =>
-                                setQuantity(Number(e.target.value))
+                                setQuantity(Math.max(1, Number(e.target.value)))
                             }
                             className="w-full border rounded-xl p-3 mt-2"
                         />
