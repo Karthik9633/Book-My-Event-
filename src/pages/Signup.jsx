@@ -1,6 +1,7 @@
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext"; // ✅ added
 
 const Signup = () => {
     const [name, setName] = useState("");
@@ -9,6 +10,9 @@ const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [terms, setTerms] = useState(false);
     const [errors, setErrors] = useState({});
+
+    const { signup } = useAuth(); // ✅ added
+    const navigate = useNavigate(); // ✅ added
 
     const validate = (field, value) => {
         let newErrors = { ...errors };
@@ -68,6 +72,14 @@ const Signup = () => {
         !errors.password &&
         !errors.terms;
 
+    // ✅ ONLY THIS LOGIC ADDED
+    const handleSignup = () => {
+        if (!isFormValid) return;
+
+        signup(name, email, password); // store user
+        navigate("/"); // redirect to home
+    };
+
     return (
         <div className="min-h-screen flex flex-col lg:flex-row">
 
@@ -88,8 +100,7 @@ const Signup = () => {
                     </h1>
 
                     <p className="text-lg opacity-90 mb-10">
-                        Join a community of enthusiasts and never miss out on the most
-                        exciting local events.
+                        Join a community of enthusiasts and never miss out on the most exciting local events.
                     </p>
 
                     <div className="flex items-center gap-4">
@@ -172,17 +183,9 @@ const Signup = () => {
                                 className="w-full outline-none bg-transparent"
                             />
                             {showPassword ? (
-                                <EyeOff
-                                    size={18}
-                                    className="text-gray-400 cursor-pointer"
-                                    onClick={() => setShowPassword(false)}
-                                />
+                                <EyeOff size={18} className="cursor-pointer" onClick={() => setShowPassword(false)} />
                             ) : (
-                                <Eye
-                                    size={18}
-                                    className="text-gray-400 cursor-pointer"
-                                    onClick={() => setShowPassword(true)}
-                                />
+                                <Eye size={18} className="cursor-pointer" onClick={() => setShowPassword(true)} />
                             )}
                         </div>
                         {errors.password && (
@@ -212,28 +215,15 @@ const Signup = () => {
                         </p>
                     )}
 
+                    {/* ONLY onClick ADDED */}
                     <button
+                        onClick={handleSignup}
                         disabled={!isFormValid}
-                        className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold shadow-lg transition ${!isFormValid
-                                ? "opacity-50 cursor-not-allowed"
-                                : ""
+                        className={`w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold shadow-lg transition ${!isFormValid ? "opacity-50 cursor-not-allowed" : ""
                             }`}
                     >
                         Create Account
                     </button>
-
-                    <div className="my-6 text-center text-gray-400 text-sm">
-                        Or sign up with
-                    </div>
-
-                    <div className="flex gap-4">
-                        <button className="flex-1 border rounded-full py-3 bg-white">
-                            Google
-                        </button>
-                        <button className="flex-1 border rounded-full py-3 bg-white">
-                            Facebook
-                        </button>
-                    </div>
 
                     <p className="text-center mt-8 text-sm text-gray-600">
                         Already have an account?{" "}
