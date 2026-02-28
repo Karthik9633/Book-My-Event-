@@ -184,7 +184,23 @@ const EventDetails = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden shadow-md">
-                            <EventMap lat={event.lat} lng={event.lng} />
+
+                            <div className="relative">
+
+                                <EventMap lat={event.lat} lng={event.lng} />
+                                <a
+                                    href={`https://www.google.com/maps/search/?api=1&query=${event.lat},${event.lng}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 hover:opacity-100 transition duration-300"
+                                >
+                                    <div className="bg-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition">
+                                        Open in Google Maps →
+                                    </div>
+                                </a>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
