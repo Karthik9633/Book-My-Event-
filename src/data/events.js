@@ -649,6 +649,7 @@ export const events = [
     category: "Technology",
     featured: true,
     date: "Nov 10 - 12",
+    calendarDate: "2026-11-10",
     location: "Kochi",
     lat: 9.9312,
     lng: 76.2673,
@@ -673,6 +674,7 @@ export const events = [
     category: "Art",
     featured: true,
     date: "Dec 20",
+    calendarDate: "2026-12-20",
     location: "Thrissur",
     lat: 10.5276,
     lng: 76.2144,
@@ -697,6 +699,7 @@ export const events = [
     category: "Music",
     featured: true,
     date: "Jan 15",
+    calendarDate: "2027-01-15",
     location: "Kovalam",
     lat: 8.4004,
     lng: 76.9784,
@@ -721,6 +724,7 @@ export const events = [
     category: "Health",
     featured: true,
     date: "Feb 10 - 12",
+    calendarDate: "2027-02-10",
     location: "Wayanad",
     lat: 11.6854,
     lng: 76.1320,
@@ -745,6 +749,7 @@ export const events = [
     category: "Food & Drink",
     featured: true,
     date: "Mar 5",
+    calendarDate: "2027-03-05",
     location: "Kozhikode",
     lat: 11.2588,
     lng: 75.7804,
@@ -769,6 +774,7 @@ export const events = [
     category: "Business",
     featured: true,
     date: "Apr 8 - 9",
+    calendarDate: "2027-04-08",
     location: "Thiruvananthapuram",
     lat: 8.5241,
     lng: 76.9366,
@@ -787,12 +793,13 @@ export const events = [
     ]
   },
 
-    {
+  {
     id: 7,
     title: "Alappuzha Backwater Boat Fest",
     category: "Culture",
     featured: true,
     date: "May 12",
+    calendarDate: "2027-05-12",
     location: "Alappuzha",
     lat: 9.4981,
     lng: 76.3388,
@@ -811,12 +818,16 @@ export const events = [
     ]
   },
 
+  // ⚡ Remaining 8–30 follow same structure
+  // (Already formatted correctly below)
+
   {
     id: 8,
     title: "Kannur Theyyam Festival",
     category: "Art",
     featured: true,
     date: "Jan 25",
+    calendarDate: "2027-01-25",
     location: "Kannur",
     lat: 11.8745,
     lng: 75.3704,
@@ -834,13 +845,13 @@ export const events = [
       { name: "Early Bird", price: 399 }
     ]
   },
-
   {
     id: 9,
     title: "Palakkad Heritage Walk",
     category: "Culture",
     featured: true,
     date: "Feb 18",
+    calendarDate: "2027-02-18",
     location: "Palakkad",
     lat: 10.7867,
     lng: 76.6548,
@@ -865,6 +876,7 @@ export const events = [
     category: "Sports",
     featured: true,
     date: "Mar 20",
+    calendarDate: "2027-03-20",
     location: "Malappuram",
     lat: 11.0510,
     lng: 76.0711,
@@ -889,6 +901,7 @@ export const events = [
     category: "Music",
     featured: true,
     date: "Apr 14",
+    calendarDate: "2027-04-14",
     location: "Kollam",
     lat: 8.8932,
     lng: 76.6141,
@@ -913,6 +926,7 @@ export const events = [
     category: "Education",
     featured: true,
     date: "May 22 - 23",
+    calendarDate: "2027-05-22",
     location: "Munnar",
     lat: 10.0889,
     lng: 77.0595,
@@ -937,6 +951,7 @@ export const events = [
     category: "Health",
     featured: true,
     date: "Jun 12",
+    calendarDate: "2027-06-12",
     location: "Ernakulam",
     lat: 9.9816,
     lng: 76.2999,
@@ -961,6 +976,7 @@ export const events = [
     category: "Art",
     featured: true,
     date: "Jul 10",
+    calendarDate: "2027-07-10",
     location: "Varkala",
     lat: 8.7379,
     lng: 76.7163,
@@ -979,37 +995,13 @@ export const events = [
     ]
   },
 
-
-
   {
-    id: 30,
-    title: "Idukki Hill Music Retreat",
-    category: "Music",
-    featured: true,
-    date: "Dec 28",
-    location: "Idukki",
-    lat: 9.8490,
-    lng: 76.9720,
-    price: 1799,
-    image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
-    about: "Music retreat in hill station.",
-    description: "Live unplugged sessions in nature.",
-    highlights: ["Acoustic Night", "Bonfire", "Camping", "Food"],
-    organizer: "Hill Beats Kerala",
-    venueAddress: "Idukki Hills Camp",
-    ticketTiers: [
-      { name: "General", price: 1799 },
-      { name: "VIP Camp", price: 3499 },
-      { name: "Couple Pack", price: 2999 },
-      { name: "Early Bird", price: 1499 }
-    ]
-  },
-    {
     id: 15,
     title: "Kasaragod Beach Carnival",
     category: "Music",
     featured: true,
     date: "Aug 5",
+    calendarDate: "2027-08-05",
     location: "Kasaragod",
     lat: 12.4996,
     lng: 74.9869,
@@ -1034,6 +1026,7 @@ export const events = [
     category: "Culture",
     featured: true,
     date: "Sep 12",
+    calendarDate: "2027-09-12",
     location: "Pathanamthitta",
     lat: 9.2648,
     lng: 76.7870,
@@ -1058,6 +1051,7 @@ export const events = [
     category: "Education",
     featured: true,
     date: "Oct 18 - 19",
+    calendarDate: "2027-10-18",
     location: "Kottayam",
     lat: 9.5916,
     lng: 76.5222,
@@ -1082,6 +1076,7 @@ export const events = [
     category: "Art",
     featured: true,
     date: "Nov 8",
+    calendarDate: "2026-11-08",
     location: "Guruvayur",
     lat: 10.5943,
     lng: 76.0411,
@@ -1106,6 +1101,7 @@ export const events = [
     category: "Health",
     featured: true,
     date: "Nov 20 - 22",
+    calendarDate: "2026-11-20",
     location: "Thekkady",
     lat: 9.5937,
     lng: 77.1614,
@@ -1130,6 +1126,7 @@ export const events = [
     category: "Technology",
     featured: true,
     date: "Dec 5 - 6",
+    calendarDate: "2026-12-05",
     location: "Kozhikode",
     lat: 11.2588,
     lng: 75.7804,
@@ -1154,6 +1151,7 @@ export const events = [
     category: "Food & Drink",
     featured: true,
     date: "Dec 15",
+    calendarDate: "2026-12-15",
     location: "Aluva",
     lat: 10.1076,
     lng: 76.3516,
@@ -1178,6 +1176,7 @@ export const events = [
     category: "Adventure",
     featured: true,
     date: "Jan 8",
+    calendarDate: "2027-01-08",
     location: "Chalakudy",
     lat: 10.3002,
     lng: 76.3370,
@@ -1202,6 +1201,7 @@ export const events = [
     category: "Sports",
     featured: true,
     date: "Jan 20",
+    calendarDate: "2027-01-20",
     location: "Nilambur",
     lat: 11.2754,
     lng: 76.2258,
@@ -1226,6 +1226,7 @@ export const events = [
     category: "Art",
     featured: true,
     date: "Feb 5",
+    calendarDate: "2027-02-05",
     location: "Attingal",
     lat: 8.6967,
     lng: 76.8156,
@@ -1250,6 +1251,7 @@ export const events = [
     category: "Sports",
     featured: true,
     date: "Feb 20",
+    calendarDate: "2027-02-20",
     location: "Ponmudi",
     lat: 8.7591,
     lng: 77.1143,
@@ -1274,6 +1276,7 @@ export const events = [
     category: "Culture",
     featured: true,
     date: "Mar 5",
+    calendarDate: "2027-03-05",
     location: "Bekal",
     lat: 12.3900,
     lng: 75.0367,
@@ -1298,6 +1301,7 @@ export const events = [
     category: "Entertainment",
     featured: true,
     date: "Mar 18",
+    calendarDate: "2027-03-18",
     location: "Cherai",
     lat: 10.1426,
     lng: 76.1784,
@@ -1322,6 +1326,7 @@ export const events = [
     category: "Food & Drink",
     featured: true,
     date: "Apr 2",
+    calendarDate: "2027-04-02",
     location: "Mattancherry",
     lat: 9.9570,
     lng: 76.2594,
@@ -1346,6 +1351,7 @@ export const events = [
     category: "Adventure",
     featured: true,
     date: "Apr 20",
+    calendarDate: "2027-04-20",
     location: "Thodupuzha",
     lat: 9.9000,
     lng: 76.7333,
@@ -1362,6 +1368,31 @@ export const events = [
       { name: "Group Entry", price: 4999 },
       { name: "Early Bird", price: 1599 }
     ]
+  },
+
+  {
+    id: 30,
+    title: "Idukki Hill Music Retreat",
+    category: "Music",
+    featured: true,
+    date: "Dec 28",
+    calendarDate: "2026-12-28",
+    location: "Idukki",
+    lat: 9.8490,
+    lng: 76.9720,
+    price: 1799,
+    image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
+    about: "Music retreat in hill station.",
+    description: "Live unplugged sessions in nature.",
+    highlights: ["Acoustic Night", "Bonfire", "Camping", "Food"],
+    organizer: "Hill Beats Kerala",
+    venueAddress: "Idukki Hills Camp",
+    ticketTiers: [
+      { name: "General", price: 1799 },
+      { name: "VIP Camp", price: 3499 },
+      { name: "Couple Pack", price: 2999 },
+      { name: "Early Bird", price: 1499 }
+    ]
   }
-  
+
 ];
