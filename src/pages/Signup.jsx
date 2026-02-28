@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useEffect } from "react";
+import { useToast } from "../context/ToastContext"
 
 const Signup = () => {
 
@@ -13,6 +14,8 @@ const Signup = () => {
             behavior: "smooth",
         });
     }, []);
+
+    const { showToast } = useToast()
 
 
     const [name, setName] = useState("");
@@ -83,14 +86,17 @@ const Signup = () => {
         !errors.password &&
         !errors.terms;
 
-    
+
     const handleSignup = () => {
         if (!isFormValid) return;
 
         const success = signup(name, email, password);
 
         if (success) {
-            navigate("/login")
+            showToast("Your account was created successfully 🎉", "success");
+            navigate("/login");
+        } else {
+            showToast("Email already registered ❌", "error");
         }
     };
 
@@ -106,7 +112,7 @@ const Signup = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-purple-700/80 to-purple-900/90 flex flex-col justify-center p-16 text-white">
                     <h2 className="text-3xl font-semibold mb-6 flex items-center gap-3">
-                         BookMyEvent
+                        BookMyEvent
                     </h2>
 
                     <h1 className="text-5xl font-bold leading-tight mb-6">
