@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import EventMap from "../components/EventMap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const EventDetails = () => {
 
@@ -86,7 +87,8 @@ const EventDetails = () => {
         <div className="bg-gray-50 min-h-screen pb-20">
 
             <div className="max-w-7xl mx-auto px-6 pt-6 text-sm text-gray-500">
-                Home › Events › {event.title}
+                <Link to="/">
+                    Home</Link> › Events › {event.title}
             </div>
 
             <div className="max-w-7xl mx-auto px-6 mt-6">
