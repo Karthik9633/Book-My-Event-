@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import 'primeicons/primeicons.css';
 import { useEffect } from "react";
+import { useToast } from "../context/ToastContext"
+
 
 const Login = () => {
 
@@ -14,6 +16,8 @@ const Login = () => {
       behavior: "smooth",
     });
   }, []);
+
+  const { showToast } = useToast()
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -63,7 +67,10 @@ const Login = () => {
     const success = login(email, password);
 
     if (success) {
+      showToast("Login Successful 🎉", "success");
       navigate("/");
+    } else {
+      showToast("Invalid Email or Password ❌", "error");
     }
   };
 
