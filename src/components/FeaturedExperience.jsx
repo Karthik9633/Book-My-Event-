@@ -6,9 +6,9 @@ const FeaturedExperience = ({ event }) => {
     <div className="max-w-7xl mx-auto px-10 mt-16 mb-20">
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-2xl font-bold">Featured Experience</h2>
-        <button className="text-purple-600 font-semibold hover:underline">
+        <Link to="/search" className="text-purple-600 font-semibold hover:underline">
           See top picks →
-        </button>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 bg-white rounded-3xl shadow-lg overflow-hidden transition-all duration-300">
