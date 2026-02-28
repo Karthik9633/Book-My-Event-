@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Heart } from "lucide-react";
 import { events } from "../data/events";
 import { Link } from "react-router-dom";
@@ -13,15 +13,35 @@ const categories = [
 
 const MapSidebar = () => {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
+  const [sortOption, setSortOption] = useState("DEFAULT");
 
-  // Filter logic
-  const filteredEvents =
+  // CATEGORY FILTER
+  const categoryFiltered =
     selectedCategory === "ALL"
       ? events
       : events.filter(
-          (event) =>
-            event.category.toUpperCase() === selectedCategory
-        );
+        (event) =>
+          event.category.toUpperCase() === selectedCategory
+      );
+
+  // SORT LOGIC
+  const filteredEvents = useMemo(() => {
+    let sorted = [...categoryFiltered];
+
+    if (sortOption === "LOW_HIGH") {
+      sorted.sort((a, b) => a.price - b.price);
+    }
+
+    if (sortOption === "HIGH_LOW") {
+      sorted.sort((a, b) => b.price - a.price);
+    }
+
+    if (sortOption === "NEWEST") {
+      sorted.sort((a, b) => b.id - a.id);
+    }
+
+    return sorted;
+  }, [categoryFiltered, sortOption]);
 
   return (
     <aside className="w-full lg:w-[420px] bg-white border-r border-gray-200 flex flex-col h-full">
@@ -34,9 +54,17 @@ const MapSidebar = () => {
             {filteredEvents.length} Events Nearby
           </h2>
 
-          <button className="text-sm bg-purple-100 text-purple-600 px-4 py-1 rounded-full font-medium">
-            Filters
-          </button>
+          {/* SORT DROPDOWN */}
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="text-sm bg-purple-100 text-purple-600 px-4 py-1 rounded-full font-medium outline-none cursor-pointer"
+          >
+            <option value="DEFAULT">Sort</option>
+            <option value="LOW_HIGH">Price: Low to High</option>
+            <option value="HIGH_LOW">Price: High to Low</option>
+            <option value="NEWEST">Newest</option>
+          </select>
         </div>
 
         {/* CATEGORY PILLS */}
@@ -45,11 +73,10 @@ const MapSidebar = () => {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-2 py-2 text-xs rounded-full font-semibold transition ${
-                selectedCategory === cat
+              className={`px-2 py-2 text-xs rounded-full font-semibold transition ${selectedCategory === cat
                   ? "bg-purple-600 text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-              }`}
+                }`}
             >
               {cat}
             </button>
@@ -109,7 +136,6 @@ const MapSidebar = () => {
                 {event.date}
               </p>
 
-              {/* VIEW DETAILS BUTTON */}
               <Link to={`/event/${event.id}`}>
                 <button className="mt-4 w-full bg-purple-600 text-white py-2 rounded-xl font-semibold hover:bg-purple-700 transition">
                   View Details
