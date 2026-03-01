@@ -2,7 +2,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily: {   // ✅ FIXED POSITION
+      fontFamily: {  
         jakarta: ["'Plus Jakarta Sans'", "sans-serif"],
       },
 
