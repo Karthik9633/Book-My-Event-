@@ -1,9 +1,12 @@
+import 'primeicons/primeicons.css';
+
+
 const Footer = () => {
   return (
     <footer className="bg-gray-50 border-t mt-0">
       <div className="max-w-7xl mx-auto px-10 py-16 grid md:grid-cols-4 gap-12">
 
-       
+
         <div>
           <h2 className="text-2xl font-extrabold text-primary mb-4">
             BookMyEvent
@@ -14,10 +17,10 @@ const Footer = () => {
           </p>
 
           <div className="flex gap-4 text-xl">
-            <span className="cursor-pointer hover:text-primary"></span>
-            <span className="cursor-pointer hover:text-primary"></span>
-            <span className="cursor-pointer hover:text-primary"></span>
-            <span className="cursor-pointer hover:text-primary"></span>
+            <span className="cursor-pointer hover:text-primary"><i className="pi pi-facebook" style={{ color: 'slateblue' }}></i></span>
+            <span className="cursor-pointer hover:text-primary"><i className="pi pi-google" style={{ color: 'slateblue' }}></i></span>
+            <span className="cursor-pointer hover:text-primary"><i className="pi pi-instagram" style={{ color: 'slateblue' }}></i></span>
+            <span className="cursor-pointer hover:text-primary"><i className="pi pi-whatsapp" style={{ color: 'slateblue' }}></i></span>
           </div>
         </div>
 
@@ -35,8 +38,6 @@ const Footer = () => {
           <h4 className="font-bold mb-4">Company</h4>
           <ul className="space-y-3 text-gray-500 text-sm">
             <li className="hover:text-primary cursor-pointer">About Us</li>
-            <li className="hover:text-primary cursor-pointer">Careers</li>
-            <li className="hover:text-primary cursor-pointer">Blog</li>
             <li className="hover:text-primary cursor-pointer">Contact</li>
           </ul>
         </div>
