@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import MyFavorites from "./pages/MyFavorites";
 import RegistrationSuccess from "./pages/RegistrationSuccess";
 import MyTickets from "./pages/MyTickets";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
         <Route path="/favorites" element={<MyFavorites />} />
         <Route path="/success/:id" element={<RegistrationSuccess/>} />
         <Route path="/mytickets" element={<MyTickets/>} />
+        <Route path="/about" element={<About />} />
+
 
       </Routes>
     </Layout>
