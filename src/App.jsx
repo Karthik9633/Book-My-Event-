@@ -12,6 +12,7 @@ import MyFavorites from "./pages/MyFavorites";
 import RegistrationSuccess from "./pages/RegistrationSuccess";
 import MyTickets from "./pages/MyTickets";
 import About from "./pages/About";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
         <Route path="/search" element={<SearchResults />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/favorites" element={<MyFavorites />} />
+        <Route path="/favorites" element={<ProtectedRoute><MyFavorites /></ProtectedRoute>} />
         <Route path="/success/:id" element={<RegistrationSuccess/>} />
         <Route path="/mytickets" element={<MyTickets/>} />
         <Route path="/about" element={<About />} />
