@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const categoriesList = [
   "All Events",
@@ -11,6 +11,15 @@ const categoriesList = [
 const FilterSidebar = ({ appliedFilters, setAppliedFilters }) => {
 
   const [tempFilters, setTempFilters] = useState(appliedFilters);
+  const [search, setSearch] = useState("");
+
+  // 🔥 APPLY FILTERS LIVE WHEN tempFilters OR search CHANGES
+  useEffect(() => {
+    setAppliedFilters({
+      ...tempFilters,
+      search
+    });
+  }, [tempFilters, search]);
 
   const toggleCategory = (category) => {
     if (category === "All Events") {
@@ -29,10 +38,6 @@ const FilterSidebar = ({ appliedFilters, setAppliedFilters }) => {
     setTempFilters({ ...tempFilters, categories: updated });
   };
 
-  const applyFilters = () => {
-    setAppliedFilters(tempFilters);
-  };
-
   const resetFilters = () => {
     const reset = {
       categories: ["All Events"],
@@ -41,12 +46,29 @@ const FilterSidebar = ({ appliedFilters, setAppliedFilters }) => {
       price: 1000,
       venue: ""
     };
+
+    setSearch("");
     setTempFilters(reset);
     setAppliedFilters(reset);
   };
 
   return (
     <aside className="w-full lg:w-[300px] bg-[#f9fafc] border-r p-6">
+
+      {/* 🔥 LIVE SEARCH */}
+      <div className="mb-10">
+        <h3 className="text-xs font-bold uppercase text-gray-400 mb-4">
+          Search
+        </h3>
+
+        <input
+          type="text"
+          placeholder="Search events..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full border rounded-xl px-4 py-2"
+        />
+      </div>
 
       {/* CATEGORIES */}
       <div className="mb-10">
@@ -119,15 +141,7 @@ const FilterSidebar = ({ appliedFilters, setAppliedFilters }) => {
         </div>
       </div>
 
-      {/* APPLY BUTTON */}
-      <button
-        onClick={applyFilters}
-        className="w-full bg-purple-600 text-white py-3 rounded-full font-semibold"
-      >
-        Apply Filters
-      </button>
-
-      {/* RESET */}
+      {/* 🔥 RESET ONLY */}
       <div className="text-center mt-4">
         <button
           onClick={resetFilters}
