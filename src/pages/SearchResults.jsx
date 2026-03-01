@@ -1,11 +1,10 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import FilterSidebar from "../components/FilterSidebar";
 import EventGridCard from "../components/EventGridCard";
 import ResultsHeader from "../components/ResultsHeader";
 import Pagination from "../components/Pagination";
 import { events } from "../data/events";
-import { useEffect } from "react";
 
 const EVENTS_PER_PAGE = 6;
 
@@ -18,6 +17,7 @@ const SearchResults = () => {
       behavior: "smooth",
     });
   }, []);
+
   const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get("q") || "";
@@ -28,38 +28,74 @@ const SearchResults = () => {
     startDate: "",
     endDate: "",
     price: 10000,
-    venue: ""
+    venue: "",
+    search: "" // 🔥 IMPORTANT (for live sidebar search)
   });
 
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState("recommended");
 
-  // 🔥 FILTER (Title + Category + Location)
+  // 🔥 FULL FILTER LOGIC (LIVE)
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
-      const { categories, price } = appliedFilters;
 
+      const {
+        categories,
+        price,
+        startDate,
+        endDate,
+        search
+      } = appliedFilters;
+
+      // CATEGORY
       const categoryMatch =
         categories.includes("All Events") ||
         categories.includes(event.category);
 
+      // PRICE
       const priceMatch = event.price <= price;
 
-      const lowerQuery = searchQuery.toLowerCase();
+      // SIDEBAR LIVE SEARCH
+      const sidebarSearchMatch =
+        !search ||
+        event.title.toLowerCase().includes(search.toLowerCase()) ||
+        event.category.toLowerCase().includes(search.toLowerCase()) ||
+        event.location.toLowerCase().includes(search.toLowerCase());
 
-      const queryMatch =
-        event.title.toLowerCase().includes(lowerQuery) ||
-        event.category.toLowerCase().includes(lowerQuery);
+      // HERO SEARCH (URL)
+      const heroQueryMatch =
+        !searchQuery ||
+        event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        event.category.toLowerCase().includes(searchQuery.toLowerCase());
 
-      const locationMatch = event.location
-        .toLowerCase()
-        .includes(searchLocation.toLowerCase());
+      const locationMatch =
+        !searchLocation ||
+        event.location
+          .toLowerCase()
+          .includes(searchLocation.toLowerCase());
 
-      return categoryMatch && priceMatch && queryMatch && locationMatch;
+      // DATE RANGE (uses calenderDate from your JSON)
+      const eventDate = new Date(event.calenderDate);
+
+      const startMatch =
+        !startDate || eventDate >= new Date(startDate);
+
+      const endMatch =
+        !endDate || eventDate <= new Date(endDate);
+
+      return (
+        categoryMatch &&
+        priceMatch &&
+        sidebarSearchMatch &&
+        heroQueryMatch &&
+        locationMatch &&
+        startMatch &&
+        endMatch
+      );
     });
   }, [appliedFilters, searchQuery, searchLocation]);
 
-  // 🔥 SORT
+  // 🔥 SORTING
   const sortedEvents = useMemo(() => {
     const sorted = [...filteredEvents];
 
@@ -68,13 +104,18 @@ const SearchResults = () => {
     } else if (sortOption === "high") {
       sorted.sort((a, b) => b.price - a.price);
     } else if (sortOption === "newest") {
-      sorted.sort((a, b) => b.id - a.id);
+      sorted.sort(
+        (a, b) =>
+          new Date(b.calenderDate) - new Date(a.calenderDate)
+      );
     }
 
     return sorted;
   }, [filteredEvents, sortOption]);
 
-  const totalPages = Math.ceil(sortedEvents.length / EVENTS_PER_PAGE);
+  const totalPages = Math.ceil(
+    sortedEvents.length / EVENTS_PER_PAGE
+  );
 
   const paginatedEvents = sortedEvents.slice(
     (currentPage - 1) * EVENTS_PER_PAGE,
