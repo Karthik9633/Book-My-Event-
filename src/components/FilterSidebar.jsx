@@ -10,7 +10,6 @@ const categoriesList = [
 
 const FilterSidebar = ({ appliedFilters, setAppliedFilters }) => {
 
-  // 🔥 TEMP STATE (does NOT affect page until Apply is clicked)
   const [tempFilters, setTempFilters] = useState(appliedFilters);
 
   const toggleCategory = (category) => {
@@ -24,8 +23,8 @@ const FilterSidebar = ({ appliedFilters, setAppliedFilters }) => {
     const updated = exists
       ? tempFilters.categories.filter((c) => c !== category)
       : tempFilters.categories
-          .filter((c) => c !== "All Events")
-          .concat(category);
+        .filter((c) => c !== "All Events")
+        .concat(category);
 
     setTempFilters({ ...tempFilters, categories: updated });
   };
