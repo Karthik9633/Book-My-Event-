@@ -817,10 +817,7 @@ export const events = [
       { name: "Early Bird", price: 699 }
     ]
   },
-
-  // ⚡ Remaining 8–30 follow same structure
-  // (Already formatted correctly below)
-
+  
   {
     id: 8,
     title: "Kannur Theyyam Festival",
