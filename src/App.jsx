@@ -1,5 +1,6 @@
-import { Routes, Route } from "react-router-dom";
-import Layout from "./layout/Layout";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Discover from "./pages/Discover";
 import EventDetails from "./pages/EventDetails";
@@ -14,6 +15,22 @@ import MyTickets from "./pages/MyTickets";
 import About from "./pages/About";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+const Layout = ({ children }) => {
+  const location = useLocation();
+
+  const hideLayout =
+    location.pathname === "/login" ||
+    location.pathname === "/signup";
+
+  return (
+    <>
+      {!hideLayout && <Navbar />}
+      {children}
+      {!hideLayout && <Footer />}
+    </>
+  );
+};
+
 function App() {
   return (
     <Layout>
@@ -26,16 +43,20 @@ function App() {
         <Route path="/search" element={<SearchResults />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/favorites" element={<ProtectedRoute><MyFavorites /></ProtectedRoute>} />
-        <Route path="/success/:id" element={<RegistrationSuccess/>} />
-        <Route path="/mytickets" element={<MyTickets/>} />
+        <Route
+          path="/favorites"
+          element={
+            <ProtectedRoute>
+              <MyFavorites />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/success/:id" element={<RegistrationSuccess />} />
+        <Route path="/mytickets" element={<MyTickets />} />
         <Route path="/about" element={<About />} />
-
-
       </Routes>
     </Layout>
   );
 }
-
 
 export default App;
