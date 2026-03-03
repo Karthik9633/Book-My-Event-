@@ -3,6 +3,8 @@
 
 A full-stack event discovery and booking platform with AI assistant, smart filtering, interactive maps, calendar view, authentication, ticket management, and premium UI experience.
 
+🔗 Live Demo:https://book-my-event-ten.vercel.app/
+
 ---
 
 ## 🌟 Live Experience
