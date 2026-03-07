@@ -1,4 +1,5 @@
-# 🚀 BookMyEvent  
+# 🚀 BookMyEvent 
+ 
 ### 🎟 Discover • Book • Experience  
 
 A full-stack event discovery and booking platform with AI assistant, smart filtering, interactive maps, calendar view, authentication, ticket management, and premium UI experience.
